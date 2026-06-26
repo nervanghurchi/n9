@@ -23,7 +23,8 @@ const PROJECTS = [
       "by a deep-maroon, black and white palette. The mark scales from a favicon " +
       "to a building sign — carried across a full stationery and merch system.",
     tags: ["Personal Brand", "Logo", "Monogram", "Stationery", "Signage"],
-    cover: "assets/img/projects/nerone-n9/logo.png",
+    cover: "assets/img/projects/nerone-n9/logo-white.png",
+    coverFit: "contain",
     gallery: [
       { src: "assets/img/projects/nerone-n9/logo.png", caption: "Primary logo — the NRG triangular monogram" },
       { src: "assets/img/projects/nerone-n9/business-card.png", caption: "Business cards — black stock with red edge paint" },

@@ -55,9 +55,10 @@
 
   function cardHtml(p, i) {
     var num = String(i + 1).padStart(2, "0");
+    var mediaClass = "project-card__media" + (p.coverFit === "contain" ? " project-card__media--contain" : "");
     return (
       '<article class="project-card" data-slug="' + p.slug + '" tabindex="0" role="button" aria-label="Open ' + escapeHtml(p.title) + ' case study">' +
-        '<div class="project-card__media">' +
+        '<div class="' + mediaClass + '">' +
           '<span class="project-card__num">' + num + "</span>" +
           '<span class="project-card__view">View case →</span>' +
           cardMedia(p, i) +
