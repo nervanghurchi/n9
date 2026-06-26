@@ -22,7 +22,7 @@ const PROJECTS = [
       "My own identity. A triangular monogram built from the initials, anchored " +
       "by a deep-maroon, black and white palette. The mark scales from a favicon " +
       "to a building sign — carried across a full stationery and merch system.",
-    tags: ["Personal Brand", "Logo", "Monogram", "Stationery", "Signage"],
+    tags: ["Personal Brand", "Logo", "Monogram", "Stationery", "Signage", "Catalog", "Merch"],
     cover: "assets/img/projects/nerone-n9/logo-white.png",
     coverFit: "contain",
     gallery: [
@@ -30,12 +30,16 @@ const PROJECTS = [
       { src: "assets/img/projects/nerone-n9/business-card.png", caption: "Business cards — black stock with red edge paint" },
       { src: "assets/img/projects/nerone-n9/letterhead.png", caption: "Letterhead — dark stationery system" },
       { src: "assets/img/projects/nerone-n9/signage.png", caption: "Exterior signage — illuminated 3D studio sign" },
-      { src: "assets/img/projects/nerone-n9/mug.png", caption: "Merch — branded ceramic mug" },
+      { src: "assets/img/projects/nerone-n9/catalog-cover.png", caption: "Portfolio / catalog cover" },
+      { src: "assets/img/projects/nerone-n9/mug.png", caption: "Merch — branded ceramic mug (white)" },
+      { src: "assets/img/projects/nerone-n9/mug-black.png", caption: "Merch — branded ceramic mug (black)" },
+      { src: "assets/img/projects/nerone-n9/tote-white.png", caption: "Merch — tote bag (white)" },
+      { src: "assets/img/projects/nerone-n9/tote-black.png", caption: "Merch — tote bag (black)" },
     ],
     meta: {
       "Designer": "Nervan Ghurchi",
       "Location": "Muscat, Oman",
-      "Deliverables": "Logo, business card, letterhead, signage, merch",
+      "Deliverables": "Logo, business card, letterhead, signage, catalog, merch",
       "Palette": "Maroon · Black · White",
     },
   },
