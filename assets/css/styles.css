@@ -117,8 +117,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   content: ""; position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 100vw; z-index: 0; pointer-events: none;
   background:
-    radial-gradient(70% 90% at 78% 38%, rgba(133,35,47,0.75), transparent 60%),
-    linear-gradient(150deg, var(--logo-red) 0%, #4a141c 22%, #200a0e 48%, var(--bg) 80%);
+    radial-gradient(62% 80% at 80% 36%, rgba(133,35,47,0.62), transparent 58%),
+    linear-gradient(150deg, #6b1c26 0%, #350f15 20%, #160a0c 44%, var(--bg) 68%);
 }
 .hero::after {
   content: ""; position: absolute; left: 50%; transform: translateX(-50%); bottom: 0;
