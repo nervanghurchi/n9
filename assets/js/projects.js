@@ -14,7 +14,7 @@ const PROJECTS = [
     slug: "nerone-n9",
     published: true,
     type: "logo",                // "logo" -> Logos section, "3d" -> 3D section
-    title: "NERONE N9 — Personal Brand",
+    title: "N9 — Personal Brand",
     client: "Nervan Ghurchi (self)",
     year: "2025",
     category: "Logo & Brand Identity",
