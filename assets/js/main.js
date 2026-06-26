@@ -28,9 +28,15 @@
     return p.published;
   });
 
+  var PLACEHOLDER =
+    "this.parentNode.innerHTML='<div class=\\'project-card__placeholder\\'><span>N9</span>Image coming soon</div>'";
+
   function cardMedia(p, index) {
     if (p.cover) {
-      return '<img src="' + p.cover + '" alt="' + escapeHtml(p.title) + ' logo" loading="lazy" />';
+      return (
+        '<img src="' + p.cover + '" alt="' + escapeHtml(p.title) + ' logo" loading="lazy" ' +
+        'onerror="' + PLACEHOLDER + '" />'
+      );
     }
     return (
       '<div class="project-card__placeholder"><span>N9</span>' +
@@ -128,7 +134,8 @@
         p.gallery
           .map(function (g) {
             var cap = g.caption ? "<figcaption>" + escapeHtml(g.caption) + "</figcaption>" : "";
-            return '<figure class="case__figure"><img src="' + g.src + '" alt="' + escapeHtml(g.caption || p.title) + '" loading="lazy" />' + cap + "</figure>";
+            var onerr = "this.closest('.case__figure').style.display='none'";
+            return '<figure class="case__figure"><img src="' + g.src + '" alt="' + escapeHtml(g.caption || p.title) + '" loading="lazy" onerror="' + onerr + '" />' + cap + "</figure>";
           })
           .join("") +
         "</div>";

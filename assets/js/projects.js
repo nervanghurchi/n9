@@ -11,21 +11,30 @@
 
 const PROJECTS = [
   {
-    slug: "project-01",
-    published: false,          // flip to true once filled in
-    title: "Project One",
-    client: "—",
-    year: "—",
+    slug: "nerone-n9",
+    published: true,
+    title: "NERONE N9 — Personal Brand",
+    client: "Nervan Ghurchi (self)",
+    year: "2025",
     category: "Logo & Brand Identity",
-    description: "Awaiting details — NERONE N9 will fill this in.",
-    tags: ["Logo", "Identity"],
-    cover: "",                 // e.g. "assets/img/projects/project-01/cover.png"
+    description:
+      "My own identity. A triangular monogram built from the initials, anchored " +
+      "by a deep-maroon, black and white palette. The mark scales from a favicon " +
+      "to a building sign — carried across a full stationery and merch system.",
+    tags: ["Personal Brand", "Logo", "Monogram", "Stationery", "Signage"],
+    cover: "assets/img/projects/nerone-n9/logo.png",
     gallery: [
-      // { src: "assets/img/projects/project-01/01-mark.png", caption: "Primary mark" },
+      { src: "assets/img/projects/nerone-n9/logo.png", caption: "Primary logo — the NRG triangular monogram" },
+      { src: "assets/img/projects/nerone-n9/business-card.jpg", caption: "Business cards — black stock with red edge paint" },
+      { src: "assets/img/projects/nerone-n9/letterhead.jpg", caption: "Letterhead — dark stationery system" },
+      { src: "assets/img/projects/nerone-n9/signage.jpg", caption: "Exterior signage — illuminated 3D studio sign" },
+      { src: "assets/img/projects/nerone-n9/mug.jpg", caption: "Merch — branded ceramic mug" },
     ],
     meta: {
-      // "Role": "Logo & identity",
-      // "Deliverables": "Mark, palette, type, guidelines",
+      "Designer": "Nervan Ghurchi",
+      "Location": "Muscat, Oman",
+      "Deliverables": "Logo, business card, letterhead, signage, merch",
+      "Palette": "Maroon · Black · White",
     },
   },
   {
