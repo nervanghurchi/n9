@@ -25,10 +25,10 @@ const PROJECTS = [
     cover: "assets/img/projects/nerone-n9/logo.png",
     gallery: [
       { src: "assets/img/projects/nerone-n9/logo.png", caption: "Primary logo — the NRG triangular monogram" },
-      { src: "assets/img/projects/nerone-n9/business-card.jpg", caption: "Business cards — black stock with red edge paint" },
-      { src: "assets/img/projects/nerone-n9/letterhead.jpg", caption: "Letterhead — dark stationery system" },
-      { src: "assets/img/projects/nerone-n9/signage.jpg", caption: "Exterior signage — illuminated 3D studio sign" },
-      { src: "assets/img/projects/nerone-n9/mug.jpg", caption: "Merch — branded ceramic mug" },
+      { src: "assets/img/projects/nerone-n9/business-card.png", caption: "Business cards — black stock with red edge paint" },
+      { src: "assets/img/projects/nerone-n9/letterhead.png", caption: "Letterhead — dark stationery system" },
+      { src: "assets/img/projects/nerone-n9/signage.png", caption: "Exterior signage — illuminated 3D studio sign" },
+      { src: "assets/img/projects/nerone-n9/mug.png", caption: "Merch — branded ceramic mug" },
     ],
     meta: {
       "Designer": "Nervan Ghurchi",
