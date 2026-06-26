@@ -22,8 +22,9 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---------- Render work grid ---------- */
-  var grid = document.getElementById("workGrid");
+  /* ---------- Render work grids (Logos + 3D) ---------- */
+  var logosGrid = document.getElementById("logosGrid");
+  var threedGrid = document.getElementById("threedGrid");
   var live = (typeof PROJECTS !== "undefined" ? PROJECTS : []).filter(function (p) {
     return p.published;
   });
@@ -52,34 +53,36 @@
       .join("");
   }
 
-  function renderGrid() {
+  function cardHtml(p, i) {
+    var num = String(i + 1).padStart(2, "0");
+    return (
+      '<article class="project-card" data-slug="' + p.slug + '" tabindex="0" role="button" aria-label="Open ' + escapeHtml(p.title) + ' case study">' +
+        '<div class="project-card__media">' +
+          '<span class="project-card__num">' + num + "</span>" +
+          '<span class="project-card__view">View case →</span>' +
+          cardMedia(p, i) +
+        "</div>" +
+        '<div class="project-card__body">' +
+          '<h3 class="project-card__title">' + escapeHtml(p.title) + "</h3>" +
+          '<p class="project-card__desc">' + escapeHtml(p.description) + "</p>" +
+          '<div class="project-card__tags">' + tagList(p.tags) + "</div>" +
+        "</div>" +
+      "</article>"
+    );
+  }
+
+  function renderGrid(grid, items, emptyMsg) {
     if (!grid) return;
-    if (!live.length) {
-      grid.innerHTML =
-        '<div class="work__empty">Work is being added — check back soon.</div>';
+    if (!items.length) {
+      grid.innerHTML = '<div class="work__empty">' + emptyMsg + "</div>";
       return;
     }
-    grid.innerHTML = live
+    grid.innerHTML = items
       .map(function (p, i) {
-        var num = String(i + 1).padStart(2, "0");
-        return (
-          '<article class="project-card" data-slug="' + p.slug + '" tabindex="0" role="button" aria-label="Open ' + escapeHtml(p.title) + ' case study">' +
-            '<div class="project-card__media">' +
-              '<span class="project-card__num">' + num + "</span>" +
-              '<span class="project-card__view">View case →</span>' +
-              cardMedia(p, i) +
-            "</div>" +
-            '<div class="project-card__body">' +
-              '<h3 class="project-card__title">' + escapeHtml(p.title) + "</h3>" +
-              '<p class="project-card__desc">' + escapeHtml(p.description) + "</p>" +
-              '<div class="project-card__tags">' + tagList(p.tags) + "</div>" +
-            "</div>" +
-          "</article>"
-        );
+        return cardHtml(p, i);
       })
       .join("");
 
-    // wire up clicks
     Array.prototype.forEach.call(grid.querySelectorAll(".project-card"), function (card) {
       card.addEventListener("click", function () {
         openCase(card.getAttribute("data-slug"));
@@ -93,6 +96,13 @@
     });
 
     observeReveals(grid.querySelectorAll(".project-card"));
+  }
+
+  function renderAll() {
+    var logos = live.filter(function (p) { return (p.type || "logo") === "logo"; });
+    var threed = live.filter(function (p) { return p.type === "3d"; });
+    renderGrid(logosGrid, logos, "Logo projects are being added — check back soon.");
+    renderGrid(threedGrid, threed, "3D projects are being added — check back soon.");
   }
 
   /* ---------- Case overlay ---------- */
@@ -207,6 +217,6 @@
   }
 
   /* ---------- Init ---------- */
-  renderGrid();
+  renderAll();
   observeReveals(document.querySelectorAll(".reveal"));
 })();
