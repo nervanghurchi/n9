@@ -1,0 +1,7 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lume Skincare logo">
+  <g>
+    <circle cx="160" cy="80" r="40" fill="none" stroke="#6b6b5e" stroke-width="4"/>
+    <path d="M160 40a40 40 0 0 1 0 80z" fill="#c9b8a8"/>
+  </g>
+  <text x="160" y="170" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="36" letter-spacing="6" fill="#6b6b5e">Lume</text>
+</svg>
