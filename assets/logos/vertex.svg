@@ -1,0 +1,8 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vertex logo">
+  <g fill="none" stroke="#0a2540" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M110 50l50 70 50-70"/>
+    <path d="M160 120v40"/>
+    <circle cx="160" cy="50" r="9" fill="#0a2540" stroke="none"/>
+  </g>
+  <text x="160" y="190" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="30" letter-spacing="8" fill="#0a2540">VERTEX</text>
+</svg>
