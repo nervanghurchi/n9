@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NERONE N9 — graphic design portfolio. Logo design and complete brand identity packages." />
+  <meta name="author" content="NERONE N9" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NERONE N9 — Graphic Design Portfolio" />
+  <meta property="og:description" content="Logo design and complete brand identity packages." />
+  <meta property="og:type" content="website" />
+
+  <title>NERONE N9 — Graphic Design Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <!-- Progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Header / Nav -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav container">
+      <a href="#top" class="brand" aria-label="NERONE N9 home">
+        <span class="brand__mark">N9</span>
+        <span class="brand__name">NERONE&nbsp;N9</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero container">
+      <p class="hero__eyebrow"><span class="dot"></span> Graphic Designer · Brand Identity</p>
+      <h1 class="hero__title">
+        Logos with a<br />
+        <span class="hero__accent">complete system</span><br />
+        behind them.
+      </h1>
+      <p class="hero__lede">
+        I'm <strong>NERONE&nbsp;N9</strong> — I design logos and the full brand
+        package around them: marks, color, type, and the rules that keep a brand
+        looking sharp everywhere it shows up.
+      </p>
+      <div class="hero__actions">
+        <a href="#work" class="btn btn--primary">View the work</a>
+        <a href="#contact" class="btn btn--ghost">Start a project</a>
+      </div>
+      <div class="hero__meta">
+        <div class="meta-item"><span class="meta-num" data-count="4">4</span><span class="meta-label">Brand packages</span></div>
+        <div class="meta-item"><span class="meta-num">100%</span><span class="meta-label">Custom marks</span></div>
+        <div class="meta-item"><span class="meta-num">∞</span><span class="meta-label">Revisions, basically</span></div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section class="work container" id="work">
+      <div class="section-head">
+        <h2 class="section-title"><span class="section-index">01</span> Selected Work</h2>
+        <p class="section-sub">Four logos, four full identity systems. Click any project to open the case.</p>
+      </div>
+      <div class="work__grid" id="workGrid">
+        <!-- Project cards injected by JS -->
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about container" id="about">
+      <div class="section-head">
+        <h2 class="section-title"><span class="section-index">02</span> About</h2>
+      </div>
+      <div class="about__body">
+        <p class="about__lead">
+          A logo isn't a picture — it's the smallest part of a much bigger system.
+        </p>
+        <p>
+          I work on the whole package: the primary mark, the variations, the color
+          palette, the typography, and the usage rules that hold it all together. The
+          goal is simple — a brand that looks intentional in every context, from a
+          favicon to a billboard.
+        </p>
+        <ul class="about__list">
+          <li><span>Logo &amp; mark design</span></li>
+          <li><span>Brand identity systems</span></li>
+          <li><span>Color &amp; type direction</span></li>
+          <li><span>Logo guidelines &amp; usage</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact container" id="contact">
+      <div class="contact__inner">
+        <h2 class="contact__title">Got a brand that needs a face?</h2>
+        <p class="contact__sub">Let's build the whole system, not just the logo.</p>
+        <a href="mailto:ghurchinervan@gmail.com" class="btn btn--primary btn--lg">ghurchinervan@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span class="brand__mark brand__mark--sm">N9</span>
+      <p>&copy; <span id="year"></span> NERONE N9. All marks &amp; designs are original work.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox / Case overlay -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <button class="overlay__close" id="overlayClose" aria-label="Close">&times;</button>
+    <div class="overlay__content" id="overlayContent"><!-- injected --></div>
+  </div>
+
+  <script src="assets/js/projects.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
