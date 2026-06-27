@@ -138,8 +138,9 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .hero-sticky {
   position: sticky; top: 0; height: 100vh;
   display: flex; align-items: center; overflow: hidden;
+  padding: 96px 0 44px;   /* clear the fixed header so content never sits under it */
 }
-.hero { position: relative; width: 100%; padding: 96px 24px; max-width: var(--maxw); margin: 0 auto; }
+.hero { position: relative; width: 100%; padding: 0 24px; max-width: var(--maxw); margin: 0 auto; }
 
 /* scroll-driven fade of everything except the logo */
 .hero__col--text, .hero__meta {
@@ -248,7 +249,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .btn--ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 .btn--lg { padding: 18px 40px; font-size: 1.05rem; }
 
-.hero__meta { display: flex; gap: 56px; flex-wrap: wrap; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--line); }
+.hero__meta { display: flex; gap: 56px; flex-wrap: wrap; margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--line); }
 .meta-item { display: flex; flex-direction: column; gap: 4px; }
 .meta-num { font-family: var(--font-mono); font-size: 1.9rem; font-weight: 500; color: var(--text); }
 .meta-label { font-size: 0.82rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; }
@@ -415,19 +416,22 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   .work__grid { grid-template-columns: 1fr; }
   .about__body { grid-template-columns: 1fr; gap: 28px; }
   .nav__links { gap: 22px; }
-  .hero { padding-top: 150px; }
-  .hero__meta { gap: 32px; }
-  .hero__grid { grid-template-columns: 1fr; gap: 24px; }
+  .hero-sticky { align-items: flex-start; padding-top: 100px; }
+  .hero__meta { gap: 32px; margin-top: 32px; }
+  .hero__grid { grid-template-columns: 1fr; gap: 18px; }
   .hero__col--logo { order: -1; }
-  .hero__logo { aspect-ratio: auto; padding: 10px; max-width: 360px; margin: 0 auto; }
+  .hero__logo { aspect-ratio: auto; padding: 6px; max-width: 250px; margin: 0 auto; }
 }
 @media (max-width: 560px) {
   .brand__name { display: none; }
   .nav__links { gap: 18px; }
   .nav__links a { font-size: 0.84rem; }
+  .hero-sticky { padding-top: 88px; }
+  .hero__grid { gap: 14px; }
+  .hero__logo { max-width: 220px; }
   .hero__actions { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
-  .hero__meta { gap: 24px; }
+  .hero__meta { display: none; }   /* drop secondary stats on phones so the hero fits */
   .meta-num { font-size: 1.5rem; }
 }
 
