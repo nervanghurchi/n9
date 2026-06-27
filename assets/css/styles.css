@@ -349,6 +349,15 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .case__desc { color: var(--text-dim); font-size: 1.1rem; max-width: 640px; margin-bottom: 26px; }
 .case__tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
 
+.case__story { max-width: 680px; margin: 0 0 48px; }
+.case__story-title {
+  font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--accent); font-weight: 500; margin-bottom: 20px;
+}
+.case__story p { color: var(--text-dim); font-size: 1.06rem; line-height: 1.75; margin-bottom: 18px; }
+.case__story p:first-of-type { color: var(--text); font-size: 1.18rem; line-height: 1.6; }
+.case__story p:last-child { margin-bottom: 0; }
+
 .case__gallery { display: grid; gap: 20px; }
 .case__figure { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--bg-2); }
 .case__figure img { width: 100%; }

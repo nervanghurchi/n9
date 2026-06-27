@@ -22,6 +22,12 @@ const PROJECTS = [
       "My own identity. A triangular monogram built from the initials, anchored " +
       "by a deep-maroon, black and white palette. The mark scales from a favicon " +
       "to a building sign — carried across a full stationery and merch system.",
+    story: [
+      "N9 is a self-portrait drawn in geometry. The N is taken from my own name; the 9 is my number — the figure I've always been drawn to — so the monogram sits somewhere between a signature and a personal talisman. It isn't a logo I designed for a brief. It's the mark I'd want to sign everything with.",
+      "I locked both characters inside a triangle on purpose. The triangle is the form I keep returning to — the most stable structure there is, three points holding tension in perfect balance. It reads at once as a peak to climb and a foundation that won't move, and that duality is exactly how I see the work I do.",
+      "The palette is anything but decorative. To me, deep red and black aren't colours — they're a feeling: power, weight, presence. Black sets the authority; the red cuts through it with intent. Together they give the mark gravity before a single word is read.",
+      "From a single idea it becomes a complete system. The mark is engineered to hold up at any scale — embroidered on a chest, embossed on a card, or lit three metres tall above a door — with the same logic of contrast, spacing and proportion carried across stationery, merchandise and signage. One identity, fully resolved, ready to live anywhere it needs to.",
+    ],
     tags: ["Personal Brand", "Logo", "Monogram", "Stationery", "Signage", "Catalog", "Merch"],
     cover: "assets/img/projects/nerone-n9/logo-white.png",
     coverFit: "contain",

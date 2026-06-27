@@ -138,6 +138,18 @@
         "</dl>";
     }
 
+    var storyHtml = "";
+    if (p.story && p.story.length) {
+      storyHtml =
+        '<div class="case__story"><h3 class="case__story-title">The concept</h3>' +
+        p.story
+          .map(function (par) {
+            return "<p>" + escapeHtml(par) + "</p>";
+          })
+          .join("") +
+        "</div>";
+    }
+
     var galleryHtml;
     if (p.gallery && p.gallery.length) {
       galleryHtml =
@@ -160,6 +172,7 @@
       '<p class="case__desc">' + escapeHtml(p.description) + "</p>" +
       '<div class="case__tags">' + tagList(p.tags) + "</div>" +
       metaHtml +
+      storyHtml +
       galleryHtml;
 
     overlay.classList.add("open");
