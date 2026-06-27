@@ -12,6 +12,37 @@
   var header = document.getElementById("siteHeader");
   var progress = document.getElementById("scrollProgress");
   var bgField = document.getElementById("bgField");
+  var heroStage = document.getElementById("heroStage");
+  var heroLogo = document.querySelector(".hero__logo");
+
+  // measure the logo's natural centre (cached; refreshed on resize)
+  var baseCX = 0, baseCY = 0;
+  function measureHeroBase() {
+    if (!heroLogo) return;
+    heroLogo.classList.add("hero__logo--measuring");
+    var r = heroLogo.getBoundingClientRect();
+    baseCX = r.left + r.width / 2;
+    baseCY = r.top + r.height / 2;
+    heroLogo.classList.remove("hero__logo--measuring");
+  }
+
+  function updateHero(y) {
+    if (!heroStage) return;
+    var range = heroStage.offsetHeight - window.innerHeight;
+    var hp = range > 0 ? Math.min(Math.max(y / range, 0), 1) : 0;
+    // remap so the logo is fully centred by ~80%, then held until release
+    var mp = Math.min(hp / 0.8, 1);
+    heroStage.style.setProperty("--hp", mp.toFixed(4));
+    // ride the logo to the centre of the viewport and scale it up
+    var dx = (window.innerWidth / 2 - baseCX) * mp;
+    var dy = (window.innerHeight / 2 - baseCY) * mp;
+    var s = 1 + mp * 0.55;
+    heroStage.style.setProperty("--logoX", dx.toFixed(1) + "px");
+    heroStage.style.setProperty("--logoY", dy.toFixed(1) + "px");
+    heroStage.style.setProperty("--logoS", s.toFixed(3));
+    heroStage.setAttribute("data-faded", mp > 0.5 ? "1" : "0");
+  }
+
   var ticking = false;
   function applyScroll() {
     ticking = false;
@@ -22,7 +53,13 @@
     if (progress) progress.style.width = p * 100 + "%";
     // gently drift the wave field as the page scrolls
     if (bgField) bgField.style.setProperty("--p", p.toFixed(4));
+    updateHero(y);
   }
+  measureHeroBase();
+  window.addEventListener("resize", function () {
+    measureHeroBase();
+    applyScroll();
+  });
   function onScroll() {
     if (!ticking) {
       ticking = true;

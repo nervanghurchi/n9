@@ -36,7 +36,7 @@ body {
   line-height: 1.6;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -133,8 +133,30 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .nav__links a:hover { color: var(--text); }
 .nav__links a:hover::after { width: 100%; }
 
-/* ---------- Hero ---------- */
-.hero { position: relative; padding: 190px 24px 120px; max-width: var(--maxw); }
+/* ---------- Hero (pinned scroll stage) ---------- */
+.hero-stage { position: relative; height: 230vh; }
+.hero-sticky {
+  position: sticky; top: 0; height: 100vh;
+  display: flex; align-items: center; overflow: hidden;
+}
+.hero { position: relative; width: 100%; padding: 96px 24px; max-width: var(--maxw); margin: 0 auto; }
+
+/* scroll-driven fade of everything except the logo */
+.hero__col--text, .hero__meta {
+  opacity: calc(1 - var(--hp, 0) * 2.1);
+  transition: opacity 0.05s linear;
+}
+.hero-stage[data-faded="1"] .hero__col--text,
+.hero-stage[data-faded="1"] .hero__meta { pointer-events: none; }
+
+/* the logo rides to centre + scales up; JS sets --logoX/--logoY/--logoS */
+.hero__col--logo { will-change: transform; }
+.hero__logo {
+  transform: translate3d(var(--logoX, 0px), var(--logoY, 0px), 0) scale(var(--logoS, 1));
+  transform-origin: center center;
+  transition: transform 0.05s linear;
+}
+.hero__logo--measuring { transform: none !important; transition: none !important; }
 /* gentle extra glow behind the hero logo (blends with the global wave field) */
 .hero::before {
   content: ""; position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -412,4 +434,10 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto; }
   .reveal, .project-card { opacity: 1; transform: none; }
+  /* disable the pinned hero so the page scrolls normally */
+  .hero-stage { height: auto !important; }
+  .hero-sticky { position: static !important; height: auto !important; }
+  .hero { padding: 150px 24px 90px !important; }
+  .hero__col--text, .hero__meta { opacity: 1 !important; }
+  .hero__logo { transform: none !important; }
 }
