@@ -35,6 +35,9 @@ const PROJECTS = [
       { src: "assets/img/projects/nerone-n9/mug-black.png", caption: "Merch — branded ceramic mug (black)" },
       { src: "assets/img/projects/nerone-n9/tote-white.png", caption: "Merch — tote bag (white)" },
       { src: "assets/img/projects/nerone-n9/tote-black.png", caption: "Merch — tote bag (black)" },
+      { src: "assets/img/projects/nerone-n9/apparel-white.png", caption: "Merch — embroidered apparel (white)" },
+      { src: "assets/img/projects/nerone-n9/apparel-black.png", caption: "Merch — embroidered apparel (black)" },
+      { src: "assets/img/projects/nerone-n9/stationery-set.png", caption: "Full brand collateral set" },
     ],
     meta: {
       "Designer": "Nervan Ghurchi",
