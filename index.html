@@ -167,10 +167,22 @@
     </div>
   </footer>
 
-  <!-- Lightbox / Case overlay -->
+  <!-- Case overlay -->
   <div class="overlay" id="overlay" aria-hidden="true">
     <button class="overlay__close" id="overlayClose" aria-label="Close">&times;</button>
     <div class="overlay__content" id="overlayContent"><!-- injected --></div>
+  </div>
+
+  <!-- Lightbox (full-screen swipeable image viewer) -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next image">&#8250;</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" id="lbImg" src="" alt="" />
+      <figcaption class="lightbox__caption" id="lbCaption"></figcaption>
+    </figure>
+    <div class="lightbox__counter" id="lbCounter"></div>
   </div>
 
   <script src="assets/js/projects.js"></script>
