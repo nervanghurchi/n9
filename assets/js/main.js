@@ -8,19 +8,29 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Header scroll state + progress ---------- */
+  /* ---------- Header scroll state + progress + wave parallax ---------- */
   var header = document.getElementById("siteHeader");
   var progress = document.getElementById("scrollProgress");
-  function onScroll() {
+  var bgField = document.getElementById("bgField");
+  var ticking = false;
+  function applyScroll() {
+    ticking = false;
     var y = window.scrollY || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? y / h : 0;
     if (header) header.classList.toggle("scrolled", y > 20);
-    if (progress) {
-      var h = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+    if (progress) progress.style.width = p * 100 + "%";
+    // gently drift the wave field as the page scrolls
+    if (bgField) bgField.style.setProperty("--p", p.toFixed(4));
+  }
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(applyScroll);
     }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  applyScroll();
 
   /* ---------- Render work grids (Logos + 3D) ---------- */
   var logosGrid = document.getElementById("logosGrid");

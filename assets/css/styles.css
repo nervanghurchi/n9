@@ -45,18 +45,41 @@ ul { list-style: none; }
 
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
-/* subtle grain / glow backdrop */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(700px circle at 80% -10%, rgba(168,45,58,0.16), transparent 60%),
-    radial-gradient(600px circle at 0% 35%, rgba(122,31,41,0.12), transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
 main, .site-header, .site-footer { position: relative; z-index: 1; }
+
+/* ---------- Animated red/black wave field ---------- */
+.bg-field {
+  position: fixed; inset: -12%; z-index: 0; pointer-events: none;
+  background: var(--bg); overflow: hidden;
+}
+.bg-field__blobs {
+  position: absolute; inset: 0;
+  filter: blur(72px) saturate(118%);
+  transform: translate3d(0, calc(var(--p, 0) * -90px), 0);
+  will-change: transform;
+}
+.blob {
+  position: absolute; border-radius: 50%;
+  opacity: 0.55; mix-blend-mode: screen;
+  background: radial-gradient(circle at 50% 50%, rgba(168,45,58,0.55), rgba(133,35,47,0.22) 45%, transparent 70%);
+}
+.blob--1 { top: -8%;  left: -6%;  width: 48vmax; height: 48vmax; animation: floatA 24s ease-in-out infinite alternate; }
+.blob--2 { top: 26%;  left: 52%;  width: 42vmax; height: 42vmax; background: radial-gradient(circle, rgba(122,31,41,0.55), transparent 68%); animation: floatB 30s ease-in-out infinite alternate; }
+.blob--3 { top: 58%;  left: 6%;   width: 40vmax; height: 40vmax; animation: floatC 27s ease-in-out infinite alternate; }
+.blob--4 { top: 68%;  left: 58%;  width: 52vmax; height: 52vmax; background: radial-gradient(circle, rgba(90,20,28,0.55), transparent 70%); animation: floatD 34s ease-in-out infinite alternate; }
+.blob--5 { top: 4%;   left: 32%;  width: 36vmax; height: 36vmax; animation: floatB 22s ease-in-out infinite alternate-reverse; }
+
+@keyframes floatA { from { transform: translate(0,0) scale(1); }     to { transform: translate(12%, 16%) scale(1.16); } }
+@keyframes floatB { from { transform: translate(0,0) scale(1); }     to { transform: translate(-14%, 10%) scale(1.10); } }
+@keyframes floatC { from { transform: translate(0,0) scale(1.05); }  to { transform: translate(16%, -12%) scale(0.94); } }
+@keyframes floatD { from { transform: translate(0,0) scale(1); }     to { transform: translate(-10%, -14%) scale(1.13); } }
+
+.bg-ripple {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0.42; mix-blend-mode: screen;
+  transform: translate3d(0, calc(var(--p, 0) * -150px), 0);
+  will-change: transform;
+}
 
 /* ---------- Scroll progress ---------- */
 .scroll-progress {
@@ -112,18 +135,11 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 
 /* ---------- Hero ---------- */
 .hero { position: relative; padding: 190px 24px 120px; max-width: var(--maxw); }
-/* full-bleed blend of the logo's red and black */
+/* gentle extra glow behind the hero logo (blends with the global wave field) */
 .hero::before {
   content: ""; position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 100vw; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(62% 80% at 80% 36%, rgba(133,35,47,0.62), transparent 58%),
-    linear-gradient(150deg, #6b1c26 0%, #350f15 20%, #160a0c 44%, var(--bg) 68%);
-}
-.hero::after {
-  content: ""; position: absolute; left: 50%; transform: translateX(-50%); bottom: 0;
-  width: 100vw; height: 160px; z-index: 0; pointer-events: none;
-  background: linear-gradient(to bottom, transparent, var(--bg));
+  background: radial-gradient(58% 70% at 80% 32%, rgba(133,35,47,0.34), transparent 60%);
 }
 .hero > * { position: relative; z-index: 1; }
 .hero__grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 48px; align-items: center; }
