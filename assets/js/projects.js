@@ -64,10 +64,9 @@ const PROJECTS = [
       "Brand identity for a café-bar in Vancouver, Canada. A maple leaf in flag-red, " +
       "wrapped in curved lines of motion — a mark named for speed and built to move.",
     story: [
-      "BRISK is the identity for a café-bar in Vancouver, Canada — a name that means speed, and a brand built to look like it's already in motion.",
-      "At its heart sits the maple leaf, lifted straight from the Canadian flag and rendered in Canada's signature red. It's a proud, instantly-read nod to the city and country the bar calls home.",
-      "Around the leaf, a set of fluid curved lines sweeps across the mark. They exist to put energy into the logo — flow, drive, momentum and speed — echoing the very meaning of the word “brisk”. The blue carries that same idea: cool, quick and electric, a deliberate counterpoint to the warmth of the red.",
-      "Red and blue, leaf and motion — local at heart and fast on its feet. The mark is engineered to carry that energy across the whole experience: business cards, menus, letterhead, signage, glassware and merch.",
+      "BRISK is the brand identity for a café-bar in Vancouver, Canada. The word itself means speed — and every choice in the mark was made to put that single idea on show.",
+      "At its centre sits the maple leaf, taken straight from the Canadian flag and rendered in the country's iconic red. It's a direct, proud signal of exactly where this place lives.",
+      "The curved lines that sweep around the leaf are deliberate: they carry a sense of flow, movement, energy and speed — the very feeling the word “brisk” is built on. The blue echoes that same idea, cool and quick and in motion, which is precisely why it sits alongside the Canadian red.",
     ],
     tags: ["Brand Identity", "Logo", "Café-bar", "Vancouver", "Stationery", "Signage", "Merch"],
     cover: "assets/img/projects/brisk/logo-white.png",
