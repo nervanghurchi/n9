@@ -135,6 +135,45 @@ const PROJECTS = [
     },
   },
   {
+    slug: "pyramid",
+    published: true,
+    type: "logo",
+    title: "Pyramid Solutions — Brand Identity",
+    client: "Pyramid Solutions",
+    year: "2025",
+    category: "Logo & Brand Identity",
+    description:
+      "Brand identity for a business-solutions firm. A bold pyramid mark in red, black " +
+      "and white — structure, ascent and a solid foundation — carried across a full " +
+      "stationery and merch system.",
+    story: [
+      "Pyramid Solutions needed an identity that looked as dependable as the outcomes it promises. The brief was a brand that reads premium and decisive at a glance — confident enough for boardrooms, clean enough to live anywhere.",
+      "The mark is built on the pyramid: the oldest shorthand there is for stability, structure and endurance. Layered horizontal strata climb from a broad, solid base toward a single point — a quiet visual for building methodically, level by level, until you reach the top. It says foundation and ambition in the same breath.",
+      "The palette keeps it sharp and serious. Red drives energy and decisiveness, black sets the authority, and white keeps everything clean and legible. Together they give the mark weight without noise.",
+      "From there it becomes a working system. The pyramid holds up from a small avatar to large-format print, and the same geometry and contrast carry cleanly across business cards, letterhead, apparel, drinkware and merch — one consistent, confident identity.",
+    ],
+    tags: ["Brand Identity", "Logo", "Business", "Geometric", "Stationery", "Merch"],
+    cover: "assets/img/projects/pyramid/logo-white.png",
+    coverFit: "contain",
+    gallery: [
+      { src: "assets/img/projects/pyramid/logo.png", caption: "Primary logo — the pyramid mark" },
+      { src: "assets/img/projects/pyramid/business-card.png", caption: "Business cards" },
+      { src: "assets/img/projects/pyramid/letterhead.png", caption: "Letterhead" },
+      { src: "assets/img/projects/pyramid/mug-black.png", caption: "Branded mug (black)" },
+      { src: "assets/img/projects/pyramid/mug-white.png", caption: "Branded mug (white)" },
+      { src: "assets/img/projects/pyramid/tote-black.png", caption: "Tote bag (black)" },
+      { src: "assets/img/projects/pyramid/tote-white.png", caption: "Tote bag (white)" },
+      { src: "assets/img/projects/pyramid/tshirt-black.png", caption: "Apparel (black)" },
+      { src: "assets/img/projects/pyramid/tshirt-white.png", caption: "Apparel (white)" },
+      { src: "assets/img/projects/pyramid/collection.png", caption: "Full brand collateral set" },
+    ],
+    meta: {
+      "Client": "Pyramid Solutions",
+      "Deliverables": "Logo, business card, letterhead, apparel, merch",
+      "Palette": "Red · Black · White",
+    },
+  },
+  {
     slug: "project-02",
     published: false,
     title: "Project Two",
