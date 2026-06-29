@@ -11,10 +11,10 @@
   --text:      #f4f1f1;
   --text-dim:  #b0a4a6;
   --text-mute: #7a6a6d;
-  --accent:    #a82d3a;   /* brand maroon (from the NRG logo) */
-  --accent-2:  #d24452;   /* brighter wine — gradient highlight / hovers */
-  --accent-deep: #7a1f29; /* deep maroon for fills */
-  --logo-red:  #85232f;   /* exact red sampled from inside the logo */
+  --accent:    #bf1e2e;   /* exact red from the hero N9 logo */
+  --accent-2:  #e23a4b;   /* brighter red — gradient highlight / hovers */
+  --accent-deep: #8f1622; /* deep red for fills */
+  --logo-red:  #bf1e2e;   /* exact red from the hero N9 logo */
   --radius:    14px;
   --maxw:      1200px;
   --ease:      cubic-bezier(0.22, 1, 0.36, 1);
@@ -61,13 +61,13 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .blob {
   position: absolute; border-radius: 50%;
   opacity: 0.6; mix-blend-mode: screen;
-  background: radial-gradient(circle at 50% 50%, rgba(168,45,58,0.5), rgba(133,35,47,0.18) 42%, transparent 72%);
+  background: radial-gradient(circle at 50% 50%, rgba(191,30,46,0.5), rgba(191,30,46,0.18) 42%, transparent 72%);
   will-change: transform; backface-visibility: hidden; transform: translateZ(0);
 }
 .blob--1 { top: -8%;  left: -6%;  width: 48vmax; height: 48vmax; animation: floatA 24s ease-in-out infinite alternate; }
-.blob--2 { top: 26%;  left: 52%;  width: 42vmax; height: 42vmax; background: radial-gradient(circle, rgba(122,31,41,0.55), transparent 68%); animation: floatB 30s ease-in-out infinite alternate; }
+.blob--2 { top: 26%;  left: 52%;  width: 42vmax; height: 42vmax; background: radial-gradient(circle, rgba(150,22,34,0.55), transparent 68%); animation: floatB 30s ease-in-out infinite alternate; }
 .blob--3 { top: 58%;  left: 6%;   width: 40vmax; height: 40vmax; animation: floatC 27s ease-in-out infinite alternate; }
-.blob--4 { top: 68%;  left: 58%;  width: 52vmax; height: 52vmax; background: radial-gradient(circle, rgba(90,20,28,0.55), transparent 70%); animation: floatD 34s ease-in-out infinite alternate; }
+.blob--4 { top: 68%;  left: 58%;  width: 52vmax; height: 52vmax; background: radial-gradient(circle, rgba(110,15,24,0.55), transparent 70%); animation: floatD 34s ease-in-out infinite alternate; }
 .blob--5 { top: 4%;   left: 32%;  width: 36vmax; height: 36vmax; animation: floatB 22s ease-in-out infinite alternate-reverse; }
 
 @keyframes floatA { from { transform: translate(0,0) scale(1); }     to { transform: translate(12%, 16%) scale(1.16); } }
@@ -157,7 +157,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .hero::before {
   content: ""; position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 100vw; z-index: 0; pointer-events: none;
-  background: radial-gradient(58% 70% at 80% 32%, rgba(133,35,47,0.34), transparent 60%);
+  background: radial-gradient(58% 70% at 80% 32%, rgba(191,30,46,0.34), transparent 60%);
 }
 .hero > * { position: relative; z-index: 1; }
 .hero__grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 48px; align-items: center; }
@@ -172,7 +172,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 }
 .hero__logo::before {
   content: ""; position: absolute; inset: -14% -8%;
-  background: radial-gradient(55% 70% at 50% 50%, rgba(210,68,82,0.30), rgba(133,35,47,0.12) 48%, transparent 74%);
+  background: radial-gradient(55% 70% at 50% 50%, rgba(226,58,75,0.30), rgba(191,30,46,0.12) 48%, transparent 74%);
   filter: blur(12px);
   pointer-events: none;
 }
@@ -282,7 +282,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 /* contain variant — for transparent logos shown on the dark card (like the hero) */
 .project-card__media--contain {
   background:
-    radial-gradient(60% 70% at 50% 45%, rgba(133,35,47,0.45), transparent 65%),
+    radial-gradient(60% 70% at 50% 45%, rgba(191,30,46,0.45), transparent 65%),
     linear-gradient(160deg, #1a1013, #0d0809);
   display: flex; align-items: center; justify-content: center; padding: 8%;
 }
@@ -348,7 +348,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 }
 .contact__inner::before {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(500px circle at 50% 0%, rgba(168,45,58,0.18), transparent 65%);
+  background: radial-gradient(500px circle at 50% 0%, rgba(191,30,46,0.18), transparent 65%);
   pointer-events: none;
 }
 .contact__title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; position: relative; }
