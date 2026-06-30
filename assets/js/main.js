@@ -175,6 +175,7 @@
   var ljNodesG = document.getElementById("ljNodes");
   var ljGlow = document.getElementById("ljGlow");
   var ljHint = document.getElementById("ljHint");
+  var ljHead = document.getElementById("ljHead");
 
   var ljReady = false;
   var ljMQ = window.matchMedia("(max-width: 860px)");   // phones/tablets -> static stack
@@ -314,6 +315,8 @@
     }
 
     if (ljHint) ljHint.style.opacity = (1 - clamp01(p / 0.04)).toFixed(2);
+    // fade the section heading out once scrolling begins so it never sits on a box
+    if (ljHead) ljHead.style.opacity = (1 - clamp01((p - 0.03) / 0.07)).toFixed(3);
   }
 
   /* ---------- Case overlay ---------- */

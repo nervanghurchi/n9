@@ -340,17 +340,18 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 }
 .lj-node.is-on { fill: var(--accent); stroke: var(--accent-2); }
 
-/* section heading pinned near the top */
+/* section heading pinned near the top — fades out as the journey starts */
 .lj-head {
   position: absolute; top: 92px; left: 50%; transform: translateX(-50%);
   width: min(var(--maxw), calc(100% - 48px)); z-index: 3;
+  transition: opacity 0.3s var(--ease);
 }
 
 /* logo boxes — stacked centre stage, cross-faded by JS */
 .lj-boxes { position: relative; z-index: 2; width: 100%; height: 100%; }
 .lj-box {
-  position: absolute; top: 50%; left: 50%;
-  width: clamp(260px, 36vw, 420px);
+  position: absolute; top: 56%; left: 50%;
+  width: clamp(230px, 30vw, 360px);
   transform: translate(-50%, -50%);
   opacity: 0; pointer-events: none;
   will-change: opacity, transform;
@@ -412,7 +413,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   .lj-road, .lj-hint { display: none !important; }
   .lj-head {
     position: static !important; transform: none !important;
-    width: auto !important; margin: 0 0 36px;
+    width: auto !important; margin: 0 0 36px; opacity: 1 !important;
   }
   .lj-boxes {
     position: static !important; height: auto !important;
