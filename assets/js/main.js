@@ -555,6 +555,18 @@
     });
   }
 
+  /* ---------- Theme toggle (dark <-> light) ---------- */
+  var themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var isLight = document.documentElement.getAttribute("data-theme") === "light";
+      var next = isLight ? "dark" : "light";
+      if (next === "light") document.documentElement.setAttribute("data-theme", "light");
+      else document.documentElement.removeAttribute("data-theme");
+      try { localStorage.setItem("n9-theme", next); } catch (e) {}
+    });
+  }
+
   /* ---------- Init ---------- */
   renderAll();
   measureLjStage();

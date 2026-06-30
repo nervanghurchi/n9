@@ -17,7 +17,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260630-7" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260630-8" />
+
+  <!-- apply saved theme before paint to avoid a flash -->
+  <script>try{var t=localStorage.getItem("n9-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}</script>
 </head>
 <body>
   <!-- Animated red/black wave field (whole-page ambient background) -->
@@ -41,15 +44,24 @@
   <header class="site-header" id="siteHeader">
     <nav class="nav container">
       <a href="#top" class="brand" aria-label="NERONE N9 home">
-        <span class="brand__mark brand__mark--logo"><img src="assets/img/projects/nerone-n9/n9-whiteN.png" alt="NERONE N9 logo" onerror="this.replaceWith(document.createTextNode('N9'))" /></span>
+        <span class="brand__mark brand__mark--logo">
+          <img class="logo-dark" src="assets/img/projects/nerone-n9/n9-whiteN.png" alt="NERONE N9 logo" />
+          <img class="logo-light" src="assets/img/projects/nerone-n9/n9-black.png" alt="NERONE N9 logo" />
+        </span>
         <span class="brand__name">NERONE&nbsp;N9</span>
         <span class="brand__short">N9</span>
       </a>
-      <ul class="nav__links">
-        <li><a href="#logos">Logos</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <div class="nav__right">
+        <ul class="nav__links">
+          <li><a href="#logos">Logos</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between light and dark theme" title="Switch theme">
+          <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+          <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -104,9 +116,8 @@
           </div>
 
           <div class="hero-bigLogo" id="heroBigLogo">
-            <img src="assets/img/projects/nerone-n9/n9-whiteN.png" alt="NERONE N9 — NRG Design logo"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="hero__logo-fallback" style="display:none;"><strong>NRG</strong>NERONE N9 · DESIGN</div>
+            <img class="logo-dark" src="assets/img/projects/nerone-n9/n9-whiteN.png" alt="NERONE N9 — NRG Design logo" />
+            <img class="logo-light" src="assets/img/projects/nerone-n9/n9-black.png" alt="NERONE N9 — NRG Design logo" />
           </div>
         </div>
 
@@ -278,7 +289,7 @@
     <div class="lightbox__counter" id="lbCounter"></div>
   </div>
 
-  <script src="assets/js/projects.js?v=20260630-7"></script>
-  <script src="assets/js/main.js?v=20260630-7"></script>
+  <script src="assets/js/projects.js?v=20260630-8"></script>
+  <script src="assets/js/main.js?v=20260630-8"></script>
 </body>
 </html>
