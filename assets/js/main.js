@@ -54,51 +54,10 @@
     // gently drift the wave field as the page scrolls
     if (bgField) bgField.style.setProperty("--p", p.toFixed(4));
     updateHero(y);
-    updateAboutPortrait(y);
   }
-  /* ---------- About portrait: scroll-driven ---------- */
-  var aboutPortrait = document.getElementById("aboutPortrait");
-  var apStage       = document.getElementById("apStage");
-  var aboutCvSec    = document.getElementById("aboutCv");
-  var apStageTop    = 0;
-
-  function measureApStage() {
-    if (!apStage) return;
-    var el = apStage, top = 0;
-    while (el) { top += el.offsetTop; el = el.offsetParent; }
-    apStageTop = top;
-  }
-
-  function updateAboutPortrait(y) {
-    if (!aboutPortrait || !apStage) return;
-    var stageH = apStage.offsetHeight;          // 200vh
-    var rel    = y - apStageTop;
-    var t      = stageH > 0 ? rel / stageH : 0;
-    t = Math.max(0, Math.min(1, t));
-
-    // t 0→0.35 : fade IN  (0 → 1)
-    // t 0.35→0.65 : hold at 1
-    // t 0.65→1   : fade OUT (1 → 0)
-    var o;
-    if      (t < 0.35) o = t / 0.35;
-    else if (t < 0.65) o = 1;
-    else               o = 1 - (t - 0.65) / 0.35;
-    aboutPortrait.style.opacity = Math.max(0, Math.min(1, o)).toFixed(3);
-  }
-
-  // IntersectionObserver: blurred portrait bg in CV section
-  if (aboutCvSec) {
-    var cvBgIo = new IntersectionObserver(function (entries) {
-      aboutCvSec.classList.toggle("bg-on", entries[0].isIntersecting);
-    }, { threshold: 0.05 });
-    cvBgIo.observe(aboutCvSec);
-  }
-
   measureHeroBase();
-  measureApStage();
   window.addEventListener("resize", function () {
     measureHeroBase();
-    measureApStage();
     applyScroll();
   });
   function onScroll() {
