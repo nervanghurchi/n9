@@ -152,6 +152,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 }
 .brand__mark--logo img { object-fit: contain; }
 .brand__name { font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em; }
+.brand__short { display: none; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--text); }
 
 .nav__links { display: flex; gap: 34px; }
 .nav__links a {
@@ -740,6 +741,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 }
 @media (max-width: 560px) {
   .brand__name { display: none; }
+  .brand__short { display: inline; }   /* short "N9" label next to the logo on phones */
   .nav__links { gap: 18px; }
   .nav__links a { font-size: 0.84rem; }
   .hero__actions { flex-direction: column; align-items: stretch; width: 100%; }
