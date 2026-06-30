@@ -133,14 +133,41 @@
       </div>
     </section>
 
-    <!-- Logos -->
-    <section class="work container" id="logos">
-      <div class="section-head">
-        <h2 class="section-title"><span class="section-index">01</span> Logos</h2>
-        <p class="section-sub">Logo design &amp; complete brand identity systems. Click any project to open the case.</p>
-      </div>
-      <div class="work__grid" id="logosGrid">
-        <!-- Logo cards injected by JS -->
+    <!-- Logos — scroll-driven journey along a road connecting the 4 brands -->
+    <section class="logos-journey" id="logos">
+      <div class="lj-stage" id="ljStage">
+        <div class="lj-pin">
+          <!-- the winding road + travelling glow -->
+          <svg class="lj-road" id="ljRoad" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <filter id="ljGlowF" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="7" result="b" />
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <path id="ljPath" class="lj-road__base"
+              d="M -40 560 C 180 600, 240 380, 430 400 C 600 418, 560 200, 760 210 C 920 218, 980 360, 1060 300"
+              fill="none" />
+            <path id="ljPathLit" class="lj-road__lit"
+              d="M -40 560 C 180 600, 240 380, 430 400 C 600 418, 560 200, 760 210 C 920 218, 980 360, 1060 300"
+              fill="none" />
+            <g id="ljNodes"></g>
+            <circle id="ljGlow" class="lj-road__glow" r="9" filter="url(#ljGlowF)" />
+          </svg>
+
+          <div class="lj-head">
+            <h2 class="section-title"><span class="section-index">01</span> Logos</h2>
+            <p class="section-sub">A journey through four complete brand identities. Click any logo to open its case.</p>
+          </div>
+
+          <!-- logo boxes (rendered by JS, cross-faded along the journey) -->
+          <div class="lj-boxes" id="ljBoxes"></div>
+
+          <div class="lj-hint" id="ljHint" aria-hidden="true">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </div>
+        </div>
       </div>
     </section>
 

@@ -311,6 +311,85 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 
 .work, .contact { padding: 90px 24px; }
 
+/* ---------- Logos journey (pinned, scroll-driven road) ---------- */
+.logos-journey { position: relative; }
+.lj-stage { position: relative; height: 460vh; }
+.lj-pin {
+  position: sticky; top: 0; height: 100vh;
+  overflow: hidden; display: grid; place-items: center;
+}
+
+/* the road */
+.lj-road { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.lj-road__base { stroke: rgba(255,255,255,0.10); stroke-width: 3; stroke-dasharray: 2 12; stroke-linecap: round; }
+.lj-road__lit  { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; opacity: 0.85;
+  /* JS drives stroke-dashoffset to "draw" the travelled portion */ }
+.lj-road__glow { fill: #fff; }
+.lj-node {
+  fill: rgba(10,10,12,0.9); stroke: rgba(255,255,255,0.25); stroke-width: 2;
+  transition: stroke 0.4s var(--ease), fill 0.4s var(--ease);
+}
+.lj-node.is-on { fill: var(--accent); stroke: var(--accent-2); }
+
+/* section heading pinned near the top */
+.lj-head {
+  position: absolute; top: 92px; left: 50%; transform: translateX(-50%);
+  width: min(var(--maxw), calc(100% - 48px)); z-index: 3;
+}
+
+/* logo boxes — stacked centre stage, cross-faded by JS */
+.lj-boxes { position: relative; z-index: 2; width: 100%; height: 100%; }
+.lj-box {
+  position: absolute; top: 50%; left: 50%;
+  width: clamp(260px, 36vw, 420px);
+  transform: translate(-50%, -50%);
+  opacity: 0; pointer-events: none;
+  will-change: opacity, transform;
+  text-align: center;
+}
+.lj-box.is-active { pointer-events: auto; }
+.lj-box__frame {
+  position: relative;
+  border: 1px solid var(--line); border-radius: 22px;
+  background: linear-gradient(160deg, rgba(20,20,23,0.92), rgba(10,10,12,0.92));
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  aspect-ratio: 4 / 3; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  padding: 10%; cursor: pointer;
+}
+.lj-box__frame::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 70% at 50% 35%, rgba(191,30,46,0.20), transparent 65%);
+}
+.lj-box__frame img {
+  position: relative; z-index: 1;
+  max-width: 100%; max-height: 100%; width: auto; height: auto;
+  filter: drop-shadow(0 14px 36px rgba(0,0,0,0.5));
+}
+.lj-box__num {
+  position: absolute; top: 14px; left: 18px; z-index: 2;
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent);
+}
+.lj-box__view {
+  position: absolute; bottom: 14px; right: 18px; z-index: 2;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-mute);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.lj-box__cap { margin-top: 22px; }
+.lj-box__title { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.02em; }
+.lj-box__sub { margin-top: 6px; color: var(--text-mute); font-size: 0.9rem; font-family: var(--font-mono); }
+
+/* scroll hint (fades out once moving) */
+.lj-hint {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--text-mute); font-family: var(--font-mono); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.16em;
+  animation: ljbob 2s ease-in-out infinite;
+}
+.lj-hint svg { width: 18px; height: 18px; }
+@keyframes ljbob { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 6px); } }
+
 /* ---------- Work grid ---------- */
 .work__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
 
@@ -588,4 +667,11 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   .hero-bigLogo { transform: none !important; margin: 0 auto; }
   .hero-tools { opacity: 1 !important; }
   .hero-reveal__item { opacity: 1 !important; transform: none !important; }
+  /* logos journey -> plain grid */
+  .lj-stage { height: auto !important; }
+  .lj-pin { position: static !important; height: auto !important; display: block !important; padding: 90px 24px; overflow: visible !important; }
+  .lj-road, .lj-hint { display: none !important; }
+  .lj-head { position: static !important; transform: none !important; width: auto !important; margin-bottom: 40px; }
+  .lj-boxes { display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 28px; height: auto !important; max-width: var(--maxw); margin: 0 auto; }
+  .lj-box { position: static !important; width: auto !important; transform: none !important; opacity: 1 !important; pointer-events: auto !important; }
 }

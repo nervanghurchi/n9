@@ -64,8 +64,14 @@
     // gently drift the wave field as the page scrolls
     if (bgField) bgField.style.setProperty("--p", p.toFixed(4));
     updateHero(y);
+    updateLogoJourney(y);
   }
   window.addEventListener("resize", function () {
+    measureLjStage();
+    applyScroll();
+  });
+  window.addEventListener("load", function () {
+    measureLjStage();
     applyScroll();
   });
   function onScroll() {
@@ -157,8 +163,154 @@
   function renderAll() {
     var logos = live.filter(function (p) { return (p.type || "logo") === "logo"; });
     var threed = live.filter(function (p) { return p.type === "3d"; });
-    renderGrid(logosGrid, logos, "Logo projects are being added — check back soon.");
+    renderLogoJourney(logos);
     renderGrid(threedGrid, threed, "3D projects are being added — check back soon.");
+  }
+
+  /* ---------- Logos journey (pinned road through the 4 brands) ---------- */
+  var ljStage = document.getElementById("ljStage");
+  var ljBoxesWrap = document.getElementById("ljBoxes");
+  var ljPath = document.getElementById("ljPath");
+  var ljPathLit = document.getElementById("ljPathLit");
+  var ljNodesG = document.getElementById("ljNodes");
+  var ljGlow = document.getElementById("ljGlow");
+  var ljHint = document.getElementById("ljHint");
+
+  var ljReady = false;
+  var ljBoxEls = [];
+  var ljNodeEls = [];
+  var ljCount = 0;
+  var ljNodeFrac = [];   // path fraction for each stop
+  var ljHoldP = [];      // scroll-progress at which each box is centred
+  var ljPathLen = 0;
+  var ljStageTop = 0, ljStageH = 0;
+  var SVGNS = "http://www.w3.org/2000/svg";
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function renderLogoJourney(logos) {
+    if (!ljBoxesWrap || !ljPath) return;
+    ljCount = logos.length;
+    if (!ljCount) return;
+
+    // build the boxes
+    ljBoxesWrap.innerHTML = logos.map(function (p, i) {
+      var num = String(i + 1).padStart(2, "0");
+      var sub = [p.client && p.client !== "—" ? p.client : "", p.year && p.year !== "—" ? p.year : ""]
+        .filter(Boolean).join(" · ");
+      var img = p.cover
+        ? '<img src="' + p.cover + '" alt="' + escapeHtml(p.title) + '" loading="lazy" onerror="this.style.display=\'none\'" />'
+        : '<span style="font-family:var(--font-mono);color:var(--text-mute)">N9</span>';
+      return (
+        '<div class="lj-box" data-slug="' + p.slug + '">' +
+          '<div class="lj-box__frame" role="button" tabindex="0" aria-label="Open ' + escapeHtml(p.title) + ' case study">' +
+            '<span class="lj-box__num">' + num + '</span>' +
+            img +
+            '<span class="lj-box__view">View case →</span>' +
+          '</div>' +
+          '<div class="lj-box__cap">' +
+            '<div class="lj-box__title">' + escapeHtml(p.title) + '</div>' +
+            (sub ? '<div class="lj-box__sub">' + escapeHtml(sub) + '</div>' : '') +
+          '</div>' +
+        '</div>'
+      );
+    }).join("");
+    ljBoxEls = Array.prototype.slice.call(ljBoxesWrap.querySelectorAll(".lj-box"));
+
+    // wire clicks
+    ljBoxEls.forEach(function (box) {
+      var slug = box.getAttribute("data-slug");
+      var frame = box.querySelector(".lj-box__frame");
+      frame.addEventListener("click", function () { openCase(slug); });
+      frame.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openCase(slug); }
+      });
+    });
+
+    // path geometry + node/hold positions
+    ljPathLen = ljPath.getTotalLength();
+    ljNodeFrac = [];
+    ljHoldP = [];
+    ljNodeEls = [];
+    if (ljNodesG) ljNodesG.innerHTML = "";
+    for (var i = 0; i < ljCount; i++) {
+      var frac = ljCount > 1 ? 0.15 + 0.75 * (i / (ljCount - 1)) : 0.5;
+      ljNodeFrac.push(frac);
+      ljHoldP.push((i + 0.5) / ljCount);
+      var pt = ljPath.getPointAtLength(frac * ljPathLen);
+      var node = document.createElementNS(SVGNS, "circle");
+      node.setAttribute("class", "lj-node");
+      node.setAttribute("cx", pt.x);
+      node.setAttribute("cy", pt.y);
+      node.setAttribute("r", "7");
+      if (ljNodesG) ljNodesG.appendChild(node);
+      ljNodeEls.push(node);
+    }
+
+    // light road dash setup
+    if (ljPathLit) {
+      ljPathLit.style.strokeDasharray = ljPathLen;
+      ljPathLit.style.strokeDashoffset = ljPathLen;
+    }
+
+    ljReady = true;
+    measureLjStage();
+  }
+
+  function measureLjStage() {
+    if (!ljStage) return;
+    var rect = ljStage.getBoundingClientRect();
+    ljStageTop = rect.top + (window.scrollY || document.documentElement.scrollTop);
+    ljStageH = ljStage.offsetHeight;
+  }
+
+  function ljGlowFrac(p) {
+    if (p <= ljHoldP[0]) return lerp(0, ljNodeFrac[0], ljHoldP[0] > 0 ? p / ljHoldP[0] : 1);
+    var last = ljCount - 1;
+    if (p >= ljHoldP[last]) {
+      var denom = 1 - ljHoldP[last];
+      return lerp(ljNodeFrac[last], 1, denom > 0 ? (p - ljHoldP[last]) / denom : 1);
+    }
+    for (var i = 0; i < last; i++) {
+      if (p <= ljHoldP[i + 1]) {
+        var t = (p - ljHoldP[i]) / (ljHoldP[i + 1] - ljHoldP[i]);
+        return lerp(ljNodeFrac[i], ljNodeFrac[i + 1], t);
+      }
+    }
+    return ljNodeFrac[last];
+  }
+
+  function updateLogoJourney(y) {
+    if (!ljReady || !ljStage) return;
+    var range = ljStageH - window.innerHeight;
+    var p = range > 0 ? clamp01((y - ljStageTop) / range) : 0;
+
+    // each box: fade/scale in on arrival, hold, then zoom toward viewer + fade out
+    for (var i = 0; i < ljCount; i++) {
+      var lt = (p - i / ljCount) * ljCount;          // local 0..1 within this stop
+      var aIn = i === 0 ? 1 : clamp01((lt + 0.15) / 0.33);
+      var dep = clamp01((lt - 0.55) / 0.40);
+      var op = Math.min(aIn, 1 - dep);
+      var sc = (0.85 + 0.15 * aIn) + dep * 0.85;
+      var box = ljBoxEls[i];
+      box.style.opacity = op.toFixed(3);
+      box.style.transform = "translate(-50%, -50%) scale(" + sc.toFixed(3) + ")";
+      if (op > 0.5) box.classList.add("is-active"); else box.classList.remove("is-active");
+    }
+
+    // travelling glow along the road
+    var gf = ljGlowFrac(p);
+    var pt = ljPath.getPointAtLength(gf * ljPathLen);
+    if (ljGlow) { ljGlow.setAttribute("cx", pt.x); ljGlow.setAttribute("cy", pt.y); }
+    if (ljPathLit) ljPathLit.style.strokeDashoffset = (ljPathLen * (1 - gf)).toFixed(1);
+
+    // light up nodes the glow has reached
+    for (var n = 0; n < ljNodeEls.length; n++) {
+      if (gf >= ljNodeFrac[n] - 0.012) ljNodeEls[n].classList.add("is-on");
+      else ljNodeEls[n].classList.remove("is-on");
+    }
+
+    if (ljHint) ljHint.style.opacity = (1 - clamp01(p / 0.04)).toFixed(2);
   }
 
   /* ---------- Case overlay ---------- */
@@ -371,5 +523,7 @@
 
   /* ---------- Init ---------- */
   renderAll();
+  measureLjStage();
+  applyScroll();
   observeReveals(document.querySelectorAll(".reveal"));
 })();
