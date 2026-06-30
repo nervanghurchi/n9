@@ -710,9 +710,31 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   .btn { width: 100%; }
   .hero__meta { gap: 28px; }
   .meta-num { font-size: 1.5rem; }
-  /* fewer floating tools on small phones to avoid clutter */
-  .hero-tool--5, .hero-tool--9, .hero-tool--10,
-  .hero-tool--12, .hero-tool--15, .hero-tool--18, .hero-tool--20 { display: none; }
+
+  /* phones: keep ALL the floating tools and re-pack them densely around the
+     logo — top band, bottom band and the narrow side edges (inset = top right
+     bottom left, with the unused sides set to auto). */
+  .hero-tool { display: block !important; width: 38px; height: 38px; }
+  .hero-tool--1  { inset: 5%  auto auto 8%;  }
+  .hero-tool--5  { inset: 6%  auto auto 30%; }
+  .hero-tool--9  { inset: 4%  auto auto 52%; width: 46px; height: 46px; }
+  .hero-tool--17 { inset: 7%  8% auto auto;  }
+  .hero-tool--11 { inset: 16% auto auto 16%; }
+  .hero-tool--2  { inset: 18% 13% auto auto; }
+  .hero-tool--13 { inset: 14% auto auto 42%; }
+  .hero-tool--6  { inset: 38% auto auto 4%;  }
+  .hero-tool--7  { inset: 36% 4% auto auto;  }
+  .hero-tool--18 { inset: 52% auto auto 5%;  width: 44px; height: 44px; }
+  .hero-tool--14 { inset: 50% 5% auto auto;  }
+  .hero-tool--10 { inset: 64% auto auto 5%;  }
+  .hero-tool--20 { inset: 62% 5% auto auto;  }
+  .hero-tool--3  { inset: auto auto 6%  10%; width: 46px; height: 46px; }
+  .hero-tool--8  { inset: auto auto 5%  34%; }
+  .hero-tool--15 { inset: auto auto 7%  56%; }
+  .hero-tool--4  { inset: auto 8%  6%  auto; }
+  .hero-tool--12 { inset: auto auto 16% 18%; }
+  .hero-tool--16 { inset: auto 13% 18% auto; }
+  .hero-tool--19 { inset: auto auto 14% 42%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
