@@ -194,7 +194,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .hero-tool--7  { width: 50px; height: 50px; top: 44%; right: 9%;  animation: drift 10.5s ease-in-out infinite; }
 .hero-tool--8  { width: 46px; height: 46px; bottom: 12%; left: 42%; animation: drift 9.5s  ease-in-out infinite reverse; }
 .hero-tool--9  { width: 54px; height: 54px; top: 20%; right: 38%; animation: drift 12.5s ease-in-out infinite; }
-.hero-tool--10 { width: 42px; height: 42px; bottom: 30%; right: 36%; color: rgba(226,58,75,0.6); animation: drift 11.5s ease-in-out infinite reverse; }
+.hero-tool--10 { width: 42px; height: 42px; top: 60%; left: 6%; color: rgba(226,58,75,0.6); animation: drift 11.5s ease-in-out infinite reverse; }
 .hero-tool--11 { width: 44px; height: 44px; top: 8%;  left: 12%; animation: drift 10.2s ease-in-out infinite; }
 .hero-tool--12 { width: 40px; height: 40px; top: 10%; right: 30%; animation: drift 12.2s ease-in-out infinite reverse; }
 .hero-tool--13 { width: 46px; height: 46px; top: 30%; left: 28%; color: rgba(226,58,75,0.6); animation: drift 9.2s  ease-in-out infinite; }
