@@ -112,68 +112,80 @@
     </section>
 
     <!-- About / CV -->
-    <section class="about" id="about">
-      <!-- Portrait background — animated by JS -->
-      <div class="about__portrait-wrap" aria-hidden="true">
-        <img class="about__portrait" id="aboutPortrait"
-             src="assets/img/portrait.png" alt="" />
-        <div class="about__portrait-veil"></div>
-      </div>
-      <!-- CV content -->
-      <div class="about__content container">
-        <div class="section-head">
-          <h2 class="section-title"><span class="section-index">03</span> About</h2>
-        </div>
-        <div class="cv" id="aboutCv">
-          <p class="cv__intro">
-            Graphic &amp; product designer with&nbsp;~10&nbsp;years of experience building complete brand identities — from the first concept to every surface the brand lives on.
-          </p>
-          <p class="cv__bio">
-            I hold a B.Sc. in Industrial Design and combine that structural, system-level thinking with self-taught graphic craft. Most of my career has been freelance — studying a brief, designing the mark, and then building every touchpoint around it: stationery, signage, apparel, digital. The four projects on this site are my highest-level work, each one a full identity system, not just a logo. I also take on product design projects, drawing directly on my industrial design background and 3D software skills.
-          </p>
+    <!-- About: two-stage scroll experience -->
+    <div id="about">
 
-          <div class="cv__cols">
-            <div class="cv__col">
-              <h3 class="cv__heading">Software &amp; Disciplines</h3>
-              <ul class="cv__skill-list">
-                <li>Adobe Photoshop <span class="cv__badge">Certified</span></li>
-                <li>Adobe Illustrator</li>
-                <li>Rhino 3D</li>
-                <li>3Ds Max</li>
-                <li>CorelDRAW</li>
-                <li>SolidWorks</li>
-                <li>Brand identity &amp; logo design</li>
-                <li>Product design</li>
-              </ul>
-              <h3 class="cv__heading cv__heading--gap">AI &amp; Emerging Tools</h3>
-              <ul class="cv__skill-list">
-                <li>Claude &amp; Claude Code</li>
-                <li>ChatGPT</li>
-                <li>Design-specific AI tools</li>
-              </ul>
-            </div>
-            <div class="cv__col">
-              <h3 class="cv__heading">Education</h3>
-              <div class="cv__edu">
-                <div class="cv__edu-item">
-                  <p class="cv__edu-degree">B.Sc. Industrial Design</p>
-                  <p class="cv__edu-school">Islamic Azad University — Tehran Central Branch</p>
-                  <p class="cv__edu-school cv__edu-school--mute">Faculty of Art &amp; Architecture</p>
-                </div>
-                <div class="cv__edu-item">
-                  <p class="cv__edu-degree">Photoshop Professional Certificate</p>
-                  <p class="cv__edu-school">Mojtame Fanni Tehran</p>
+      <!-- Stage 1: Portrait (pinned, scroll-driven opacity) -->
+      <div class="ap-stage" id="apStage" aria-hidden="true">
+        <div class="ap-stage__pin">
+          <img class="ap-stage__img" id="aboutPortrait"
+               src="assets/img/portrait.png" alt="" />
+          <div class="ap-stage__veil"></div>
+        </div>
+      </div>
+
+      <!-- Stage 2: CV section — blurred portrait behind text -->
+      <section class="about-cv" id="aboutCv">
+        <div class="about-cv__bg" aria-hidden="true">
+          <img src="assets/img/portrait.png" alt="" />
+          <div class="about-cv__veil"></div>
+        </div>
+        <div class="about-cv__content container">
+          <div class="section-head">
+            <h2 class="section-title"><span class="section-index">03</span> About</h2>
+          </div>
+          <div class="cv">
+            <p class="cv__intro">
+              Graphic &amp; product designer with&nbsp;~10&nbsp;years of experience building complete brand identities — from the first concept to every surface the brand lives on.
+            </p>
+            <p class="cv__bio">
+              I hold a B.Sc. in Industrial Design and combine that structural, system-level thinking with self-taught graphic craft. Most of my career has been freelance — studying a brief, designing the mark, and then building every touchpoint around it: stationery, signage, apparel, digital. The four projects on this site are my highest-level work, each one a full identity system, not just a logo. I also take on product design projects, drawing directly on my industrial design background and 3D software skills.
+            </p>
+
+            <div class="cv__cols">
+              <div class="cv__col">
+                <h3 class="cv__heading">Software &amp; Disciplines</h3>
+                <ul class="cv__skill-list">
+                  <li>Adobe Photoshop <span class="cv__badge">Certified</span></li>
+                  <li>Adobe Illustrator</li>
+                  <li>Rhino 3D</li>
+                  <li>3Ds Max</li>
+                  <li>CorelDRAW</li>
+                  <li>SolidWorks</li>
+                  <li>Brand identity &amp; logo design</li>
+                  <li>Product design</li>
+                </ul>
+                <h3 class="cv__heading cv__heading--gap">AI &amp; Emerging Tools</h3>
+                <ul class="cv__skill-list">
+                  <li>Claude &amp; Claude Code</li>
+                  <li>ChatGPT</li>
+                  <li>Design-specific AI tools</li>
+                </ul>
+              </div>
+              <div class="cv__col">
+                <h3 class="cv__heading">Education</h3>
+                <div class="cv__edu">
+                  <div class="cv__edu-item">
+                    <p class="cv__edu-degree">B.Sc. Industrial Design</p>
+                    <p class="cv__edu-school">Islamic Azad University — Tehran Central Branch</p>
+                    <p class="cv__edu-school cv__edu-school--mute">Faculty of Art &amp; Architecture</p>
+                  </div>
+                  <div class="cv__edu-item">
+                    <p class="cv__edu-degree">Photoshop Professional Certificate</p>
+                    <p class="cv__edu-school">Mojtame Fanni Tehran</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <blockquote class="cv__philosophy">
-            What drives me most is the moment a skill clicks — the sense of reaching a level I couldn't reach before. I don't create just to complete briefs; I create because building something new gives me a feeling nothing else does. My goal is constant improvement: always learning, always reaching the next level.
-          </blockquote>
+            <blockquote class="cv__philosophy">
+              What drives me most is the moment a skill clicks — the sense of reaching a level I couldn't reach before. I don't create just to complete briefs; I create because building something new gives me a feeling nothing else does. My goal is constant improvement: always learning, always reaching the next level.
+            </blockquote>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+    </div>
 
     <!-- Contact -->
     <section class="contact container" id="contact">
