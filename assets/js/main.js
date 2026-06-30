@@ -13,34 +13,44 @@
   var progress = document.getElementById("scrollProgress");
   var bgField = document.getElementById("bgField");
   var heroStage = document.getElementById("heroStage");
-  var heroLogo = document.querySelector(".hero__logo");
+  var heroReveal = document.getElementById("heroReveal");
+  var revealItems = heroReveal
+    ? Array.prototype.slice.call(heroReveal.querySelectorAll(".hero-reveal__item"))
+    : [];
 
-  // measure the logo's natural centre (cached; refreshed on resize)
-  var baseCX = 0, baseCY = 0;
-  function measureHeroBase() {
-    if (!heroLogo) return;
-    heroLogo.classList.add("hero__logo--measuring");
-    var r = heroLogo.getBoundingClientRect();
-    baseCX = r.left + r.width / 2;
-    baseCY = r.top + r.height / 2;
-    heroLogo.classList.remove("hero__logo--measuring");
-  }
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
   function updateHero(y) {
     if (!heroStage) return;
     var range = heroStage.offsetHeight - window.innerHeight;
-    var hp = range > 0 ? Math.min(Math.max(y / range, 0), 1) : 0;
-    // remap so the logo is fully centred by ~80%, then held until release
-    var mp = Math.min(hp / 0.8, 1);
-    heroStage.style.setProperty("--hp", mp.toFixed(4));
-    // ride the logo to the centre of the viewport and scale it up
-    var dx = (window.innerWidth / 2 - baseCX) * mp;
-    var dy = (window.innerHeight / 2 - baseCY) * mp;
-    var s = 1 + mp * 0.55;
-    heroStage.style.setProperty("--logoX", dx.toFixed(1) + "px");
-    heroStage.style.setProperty("--logoY", dy.toFixed(1) + "px");
-    heroStage.style.setProperty("--logoS", s.toFixed(3));
-    heroStage.setAttribute("data-faded", mp > 0.5 ? "1" : "0");
+    var p = range > 0 ? clamp01(y / range) : 0;
+
+    /* --- Phase A: floating tools fade out (0 → 0.18) --- */
+    var toolsOp = 1 - clamp01(p / 0.18);
+
+    /* --- logo zooms bigger (0 → 0.40): scale 1 → 1.9 --- */
+    var scale = 1 + clamp01(p / 0.40) * 0.9;
+
+    /* --- Phase B: logo flies up & fades out (0.30 → 0.46) --- */
+    var exit = clamp01((p - 0.30) / 0.16);
+    var introY = -exit * window.innerHeight * 0.62;   // rise off the top
+    var introOp = 1 - exit;
+    scale += exit * 0.7;                               // accelerate as it leaves
+
+    heroStage.style.setProperty("--toolsOp", toolsOp.toFixed(3));
+    heroStage.style.setProperty("--introScale", scale.toFixed(3));
+    heroStage.style.setProperty("--introY", introY.toFixed(1) + "px");
+    heroStage.style.setProperty("--introOp", introOp.toFixed(3));
+
+    /* --- Phase C: centred text rises from the bottom, staggered (0.48 → 0.95) --- */
+    var r = clamp01((p - 0.48) / 0.47);
+    for (var i = 0; i < revealItems.length; i++) {
+      var lt = clamp01((r - i * 0.08) / 0.5);
+      var el = revealItems[i];
+      el.style.opacity = lt.toFixed(3);
+      el.style.transform = "translateY(" + ((1 - lt) * 48).toFixed(1) + "px)";
+    }
+    if (heroReveal) heroReveal.setAttribute("data-on", r > 0.05 ? "1" : "0");
   }
 
   var ticking = false;
@@ -55,9 +65,7 @@
     if (bgField) bgField.style.setProperty("--p", p.toFixed(4));
     updateHero(y);
   }
-  measureHeroBase();
   window.addEventListener("resize", function () {
-    measureHeroBase();
     applyScroll();
   });
   function onScroll() {
