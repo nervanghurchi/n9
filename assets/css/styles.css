@@ -839,10 +839,10 @@ body { transition: background-color 0.4s var(--ease), color 0.4s var(--ease); }
 
 /* ---------- Light theme variables ---------- */
 html[data-theme="light"] {
-  --bg:        #f3eff0;
-  --bg-2:      #ffffff;
-  --bg-3:      #e9e3e5;
-  --line:      #ddd5d7;
+  --bg:        #f9ebec;   /* warm, faintly red-tinted page */
+  --bg-2:      #fffafa;
+  --bg-3:      #f1dfe1;
+  --line:      #e6cfd2;
   --text:      #1a1416;
   --text-dim:  #51484b;
   --text-mute: #897c80;
@@ -858,11 +858,11 @@ html[data-theme="light"] {
     inset 0 0 0 1px rgba(255,255,255,0.6);
 }
 
-/* soften the red wave field on the light page */
-html[data-theme="light"] .bg-field { opacity: 0.5; }
+/* let the red wave field show more on the light page */
+html[data-theme="light"] .bg-field { opacity: 0.72; }
 
 /* header bar (scrolled) */
-html[data-theme="light"] .site-header.scrolled { background: rgba(255,255,255,0.72); }
+html[data-theme="light"] .site-header.scrolled { background: rgba(255,248,248,0.72); }
 
 /* hero */
 html[data-theme="light"] .hero__tag { color: #15100f; text-shadow: none; }
