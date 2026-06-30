@@ -13,7 +13,7 @@ const PROJECTS = [
   {
     slug: "nerone-n9",
     published: true,
-    type: "logo",                // "logo" -> Logos section, "3d" -> 3D section
+    type: "logo",                // "logo" -> Logos section
     title: "N9 — Personal Brand",
     client: "Nervan Ghurchi (self)",
     year: "2025",
@@ -35,7 +35,7 @@ const PROJECTS = [
       { src: "assets/img/projects/nerone-n9/logo.png", caption: "Primary logo — the NRG triangular monogram" },
       { src: "assets/img/projects/nerone-n9/business-card.png", caption: "Business cards — black stock with red edge paint" },
       { src: "assets/img/projects/nerone-n9/letterhead.png", caption: "Letterhead — dark stationery system" },
-      { src: "assets/img/projects/nerone-n9/signage.png", caption: "Exterior signage — illuminated 3D studio sign" },
+      { src: "assets/img/projects/nerone-n9/signage.png", caption: "Exterior signage — illuminated studio sign" },
       { src: "assets/img/projects/nerone-n9/catalog-cover.png", caption: "Portfolio / catalog cover" },
       { src: "assets/img/projects/nerone-n9/mug.png", caption: "Merch — branded ceramic mug (white)" },
       { src: "assets/img/projects/nerone-n9/mug-black.png", caption: "Merch — branded ceramic mug (black)" },

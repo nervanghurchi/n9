@@ -83,9 +83,7 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   applyScroll();
 
-  /* ---------- Render work grids (Logos + 3D) ---------- */
-  var logosGrid = document.getElementById("logosGrid");
-  var threedGrid = document.getElementById("threedGrid");
+  /* ---------- Render work (Logos journey) ---------- */
   var live = (typeof PROJECTS !== "undefined" ? PROJECTS : []).filter(function (p) {
     return p.published;
   });
@@ -162,9 +160,7 @@
 
   function renderAll() {
     var logos = live.filter(function (p) { return (p.type || "logo") === "logo"; });
-    var threed = live.filter(function (p) { return p.type === "3d"; });
     renderLogoJourney(logos);
-    renderGrid(threedGrid, threed, "3D projects are being added — check back soon.");
   }
 
   /* ---------- Logos journey (pinned road through the 4 brands) ---------- */
