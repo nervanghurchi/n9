@@ -16,7 +16,7 @@ const PROJECTS = [
     type: "logo",                // "logo" -> Logos section
     title: "N9 — Personal Brand",
     client: "Nervan Ghurchi (self)",
-    year: "2025",
+    year: "2020",
     category: "Logo & Brand Identity",
     description:
       "My own identity. A triangular monogram built from the initials, anchored " +
@@ -58,7 +58,7 @@ const PROJECTS = [
     type: "logo",
     title: "BRISK — Café-bar Identity",
     client: "BRISK Café-bar",
-    year: "2025",
+    year: "2018",
     category: "Logo & Brand Identity",
     description:
       "Brand identity for a café-bar in Vancouver, Canada. A maple leaf in flag-red, " +
@@ -96,7 +96,7 @@ const PROJECTS = [
     type: "logo",
     title: "A'soud Academy — Sports Brand Identity",
     client: "A'soud Academy",
-    year: "2025",
+    year: "2026",
     category: "Logo & Brand Identity",
     description:
       "Brand identity for the multi-sport academy of A'soud Global School in Muscat, Oman. " +
@@ -140,7 +140,7 @@ const PROJECTS = [
     type: "logo",
     title: "MOSALAS (مثلث) — Brand Identity",
     client: "MOSALAS — online shop",
-    year: "2025",
+    year: "2022",
     category: "Logo & Brand Identity",
     description:
       "Brand identity for MOSALAS (مثلث) — an Instagram online shop whose name is the " +
