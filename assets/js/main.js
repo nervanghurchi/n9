@@ -177,6 +177,7 @@
   var ljHint = document.getElementById("ljHint");
 
   var ljReady = false;
+  var ljMQ = window.matchMedia("(max-width: 860px)");   // phones/tablets -> static stack
   var ljBoxEls = [];
   var ljNodeEls = [];
   var ljCount = 0;
@@ -227,33 +228,35 @@
       });
     });
 
-    // path geometry + node/hold positions
-    ljPathLen = ljPath.getTotalLength();
+    // path geometry + node/hold positions (skipped on mobile static layout)
     ljNodeFrac = [];
     ljHoldP = [];
     ljNodeEls = [];
     if (ljNodesG) ljNodesG.innerHTML = "";
-    for (var i = 0; i < ljCount; i++) {
-      var frac = ljCount > 1 ? 0.15 + 0.75 * (i / (ljCount - 1)) : 0.5;
-      ljNodeFrac.push(frac);
-      ljHoldP.push((i + 0.5) / ljCount);
-      var pt = ljPath.getPointAtLength(frac * ljPathLen);
-      var node = document.createElementNS(SVGNS, "circle");
-      node.setAttribute("class", "lj-node");
-      node.setAttribute("cx", pt.x);
-      node.setAttribute("cy", pt.y);
-      node.setAttribute("r", "7");
-      if (ljNodesG) ljNodesG.appendChild(node);
-      ljNodeEls.push(node);
+    try {
+      ljPathLen = ljPath.getTotalLength();
+      for (var i = 0; i < ljCount; i++) {
+        var frac = ljCount > 1 ? 0.15 + 0.75 * (i / (ljCount - 1)) : 0.5;
+        ljNodeFrac.push(frac);
+        ljHoldP.push((i + 0.5) / ljCount);
+        var pt = ljPath.getPointAtLength(frac * ljPathLen);
+        var node = document.createElementNS(SVGNS, "circle");
+        node.setAttribute("class", "lj-node");
+        node.setAttribute("cx", pt.x);
+        node.setAttribute("cy", pt.y);
+        node.setAttribute("r", "7");
+        if (ljNodesG) ljNodesG.appendChild(node);
+        ljNodeEls.push(node);
+      }
+      if (ljPathLit) {
+        ljPathLit.style.strokeDasharray = ljPathLen;
+        ljPathLit.style.strokeDashoffset = ljPathLen;
+      }
+      ljReady = true;
+    } catch (e) {
+      ljReady = false;   // boxes still show via the static mobile/grid CSS
     }
 
-    // light road dash setup
-    if (ljPathLit) {
-      ljPathLit.style.strokeDasharray = ljPathLen;
-      ljPathLit.style.strokeDashoffset = ljPathLen;
-    }
-
-    ljReady = true;
     measureLjStage();
   }
 
@@ -281,7 +284,7 @@
   }
 
   function updateLogoJourney(y) {
-    if (!ljReady || !ljStage) return;
+    if (!ljReady || !ljStage || ljMQ.matches) return;   // static stack on phones
     var range = ljStageH - window.innerHeight;
     var p = range > 0 ? clamp01((y - ljStageTop) / range) : 0;
 
