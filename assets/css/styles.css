@@ -255,7 +255,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .section-index { font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent); font-weight: 500; }
 .section-sub { color: var(--text-mute); margin-top: 14px; font-size: 1.02rem; max-width: 560px; }
 
-.work, .about, .contact { padding: 90px 24px; }
+.work, .contact { padding: 90px 24px; }
 
 /* ---------- Work grid ---------- */
 .work__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
@@ -329,6 +329,50 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .work__empty {
   grid-column: 1 / -1; text-align: center; padding: 70px 24px; color: var(--text-mute);
   border: 1px dashed var(--line); border-radius: var(--radius); font-family: var(--font-mono); font-size: 0.9rem;
+}
+
+/* ---------- About — portrait background ---------- */
+.about { position: relative; overflow: hidden; }
+.about__portrait-wrap {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+.about__portrait {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 18%;
+  opacity: 0; transform: scale(1.06);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+  will-change: opacity, filter, transform;
+}
+/* Phase 1 — fade in */
+.about__portrait.p1 { opacity: 1; transform: scale(1); }
+/* Phase 2 — blur (scale compensates edge bleed) */
+.about__portrait.p2 {
+  filter: blur(12px); transform: scale(1.1);
+  transition: opacity 1s var(--ease), filter 0.85s var(--ease), transform 0.85s var(--ease);
+}
+/* Phase 3 — dim behind text */
+.about__portrait.p3 {
+  opacity: 0.07;
+  transition: opacity 0.9s var(--ease), filter 0.85s var(--ease), transform 0.85s var(--ease);
+}
+/* Gradient veil — dark on text side, lighter on portrait side */
+.about__portrait-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    108deg,
+    rgba(6,6,7,0.95) 0%,
+    rgba(6,6,7,0.80) 46%,
+    rgba(6,6,7,0.52) 100%
+  );
+}
+.about__content { position: relative; z-index: 2; padding: 90px 24px; }
+
+/* CV content animation */
+.cv--hidden { opacity: 0; transform: translateY(20px); }
+.cv--visible {
+  opacity: 1; transform: translateY(0);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 
 /* ---------- About / CV ---------- */
@@ -495,8 +539,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .work__grid { grid-template-columns: 1fr; }
-  .about__body { grid-template-columns: 1fr; gap: 28px; }
   .cv__cols { grid-template-columns: 1fr; gap: 28px; }
+  .about__content { padding: 72px 24px; }
   .nav__links { gap: 22px; }
   .hero-sticky { align-items: flex-start; padding-top: 100px; }
   .hero__meta { gap: 32px; margin-top: 32px; }

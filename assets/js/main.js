@@ -361,6 +361,36 @@
       .replace(/"/g, "&quot;");
   }
 
+  /* ---------- About portrait cinematic reveal ---------- */
+  var aboutPortrait = document.getElementById("aboutPortrait");
+  var aboutCv       = document.getElementById("aboutCv");
+  var aboutSection  = document.getElementById("about");
+
+  if (aboutPortrait && aboutCv && aboutSection) {
+    // Hide CV until the animation plays
+    aboutCv.classList.add("cv--hidden");
+
+    var portraitIo = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      portraitIo.disconnect();
+
+      // Phase 1 — portrait fades in
+      setTimeout(function () { aboutPortrait.classList.add("p1"); }, 80);
+      // Phase 2 — portrait blurs
+      setTimeout(function () { aboutPortrait.classList.add("p2"); }, 1200);
+      // Phase 3 — CV content rises in
+      setTimeout(function () {
+        aboutCv.classList.remove("cv--hidden");
+        aboutCv.classList.add("cv--visible");
+      }, 1900);
+      // Phase 4 — portrait dims to almost nothing behind text
+      setTimeout(function () { aboutPortrait.classList.add("p3"); }, 2500);
+
+    }, { threshold: 0.12 });
+
+    portraitIo.observe(aboutSection);
+  }
+
   /* ---------- Init ---------- */
   renderAll();
   observeReveals(document.querySelectorAll(".reveal"));
