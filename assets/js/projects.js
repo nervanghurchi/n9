@@ -84,7 +84,7 @@ const PROJECTS = [
       { src: "assets/img/projects/brisk/collection.png", caption: "Full café-bar collateral set" },
     ],
     meta: {
-      "Client": "BRISK Café-bar",
+      "Designer": "Nervan Ghurchi",
       "Location": "Vancouver, Canada",
       "Deliverables": "Logo, cards, menu, letterhead, signage, glassware, merch",
       "Palette": "Canada red · Blue · White",
@@ -127,7 +127,7 @@ const PROJECTS = [
       { src: "assets/img/projects/asoud/collection.png", caption: "Full kit & collateral set" },
     ],
     meta: {
-      "Client": "A'soud Academy",
+      "Designer": "Nervan Ghurchi",
       "Affiliation": "A'soud Global School, Muscat",
       "Location": "Muscat, Oman",
       "Deliverables": "Logo, stationery, signage, apparel, merch",
@@ -168,6 +168,7 @@ const PROJECTS = [
       { src: "assets/img/projects/mosalas/collection.png", caption: "MOSALAS — full collateral set" },
     ],
     meta: {
+      "Designer": "Nervan Ghurchi",
       "Brand": "مثلث (MOSALAS)",
       "Type": "Instagram online shop",
       "Deliverables": "Logo, business card, letterhead, apparel, merch",
