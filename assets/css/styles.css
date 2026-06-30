@@ -195,6 +195,16 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .hero-tool--8  { width: 46px; height: 46px; bottom: 12%; left: 42%; animation: drift 9.5s  ease-in-out infinite reverse; }
 .hero-tool--9  { width: 54px; height: 54px; top: 20%; right: 38%; animation: drift 12.5s ease-in-out infinite; }
 .hero-tool--10 { width: 42px; height: 42px; bottom: 30%; right: 36%; color: rgba(226,58,75,0.6); animation: drift 11.5s ease-in-out infinite reverse; }
+.hero-tool--11 { width: 44px; height: 44px; top: 8%;  left: 12%; animation: drift 10.2s ease-in-out infinite; }
+.hero-tool--12 { width: 40px; height: 40px; top: 10%; right: 30%; animation: drift 12.2s ease-in-out infinite reverse; }
+.hero-tool--13 { width: 46px; height: 46px; top: 30%; left: 28%; color: rgba(226,58,75,0.6); animation: drift 9.2s  ease-in-out infinite; }
+.hero-tool--14 { width: 42px; height: 42px; top: 36%; right: 22%; animation: drift 11.8s ease-in-out infinite reverse; }
+.hero-tool--15 { width: 48px; height: 48px; bottom: 8%; left: 30%; animation: drift 10.8s ease-in-out infinite; }
+.hero-tool--16 { width: 44px; height: 44px; bottom: 14%; right: 10%; animation: drift 13.2s ease-in-out infinite reverse; }
+.hero-tool--17 { width: 40px; height: 40px; top: 7%;  right: 8%;  color: rgba(226,58,75,0.62); animation: drift 8.6s ease-in-out infinite; }
+.hero-tool--18 { width: 46px; height: 46px; bottom: 26%; left: 8%; animation: drift 12.8s ease-in-out infinite reverse; }
+.hero-tool--19 { width: 42px; height: 42px; bottom: 38%; left: 24%; animation: drift 9.8s  ease-in-out infinite; }
+.hero-tool--20 { width: 44px; height: 44px; top: 52%; right: 20%; animation: drift 11.2s ease-in-out infinite reverse; }
 @keyframes drift {
   0%,100% { transform: translate3d(0,0,0) rotate(0deg); }
   50%     { transform: translate3d(0,-16px,0) rotate(6deg); }
@@ -543,6 +553,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   .hero-tool--1 { left: 12%; } .hero-tool--3 { left: 10%; }
   .hero-tool--2 { right: 10%; } .hero-tool--4 { right: 12%; }
   .hero-tool--6 { left: 4%; }  .hero-tool--7 { right: 4%; }
+  /* thin the densest mid icons on tablets */
+  .hero-tool--13, .hero-tool--14, .hero-tool--19 { display: none; }
 }
 @media (max-width: 560px) {
   .brand__name { display: none; }
@@ -553,7 +565,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   .hero__meta { gap: 28px; }
   .meta-num { font-size: 1.5rem; }
   /* fewer floating tools on small phones to avoid clutter */
-  .hero-tool--5, .hero-tool--9, .hero-tool--10 { display: none; }
+  .hero-tool--5, .hero-tool--9, .hero-tool--10,
+  .hero-tool--12, .hero-tool--15, .hero-tool--18, .hero-tool--20 { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
