@@ -92,6 +92,22 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   z-index: 100; transition: width 0.1s linear;
 }
 
+/* ---------- Cursor glow (desktop only) ---------- */
+.cursor-glow {
+  position: fixed; top: 0; left: 0; z-index: 55;
+  width: 460px; height: 460px; margin: -230px 0 0 -230px;  /* centre on the point */
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(226,58,75,0.22), rgba(191,30,46,0.10) 42%, transparent 70%);
+  filter: blur(24px);
+  mix-blend-mode: screen;
+  opacity: 0; transition: opacity 0.35s var(--ease);
+  transform: translate3d(-100px, -100px, 0);
+  will-change: transform, opacity;
+}
+.cursor-glow.is-on { opacity: 1; }
+/* hide on touch / no-hover devices */
+@media (hover: none), (pointer: coarse) { .cursor-glow { display: none; } }
+
 /* ---------- Header ---------- */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;

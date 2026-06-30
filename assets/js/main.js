@@ -523,6 +523,38 @@
       .replace(/"/g, "&quot;");
   }
 
+  /* ---------- Cursor glow (desktop only, smooth follow) ---------- */
+  var glow = document.getElementById("cursorGlow");
+  if (glow && window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    var gx = window.innerWidth / 2, gy = window.innerHeight / 2;
+    var tx = gx, ty = gy, glowRaf = null, glowShown = false;
+
+    function glowFollow() {
+      gx += (tx - gx) * 0.16;
+      gy += (ty - gy) * 0.16;
+      glow.style.transform = "translate3d(" + gx.toFixed(1) + "px," + gy.toFixed(1) + "px,0)";
+      if (Math.abs(tx - gx) > 0.4 || Math.abs(ty - gy) > 0.4) {
+        glowRaf = window.requestAnimationFrame(glowFollow);
+      } else {
+        glow.style.transform = "translate3d(" + tx.toFixed(1) + "px," + ty.toFixed(1) + "px,0)";
+        glowRaf = null;
+      }
+    }
+
+    window.addEventListener("mousemove", function (e) {
+      tx = e.clientX; ty = e.clientY;
+      if (!glowShown) { glowShown = true; glow.classList.add("is-on"); }
+      if (!glowRaf) glowRaf = window.requestAnimationFrame(glowFollow);
+    }, { passive: true });
+
+    document.addEventListener("mouseleave", function () {
+      glow.classList.remove("is-on"); glowShown = false;
+    });
+    window.addEventListener("blur", function () {
+      glow.classList.remove("is-on"); glowShown = false;
+    });
+  }
+
   /* ---------- Init ---------- */
   renderAll();
   measureLjStage();
