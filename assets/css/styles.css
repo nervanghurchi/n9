@@ -101,10 +101,10 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 /* ---------- Cursor glow (desktop only) ---------- */
 .cursor-glow {
   position: fixed; top: 0; left: 0; z-index: 55;
-  width: 460px; height: 460px; margin: -230px 0 0 -230px;  /* centre on the point */
+  width: 260px; height: 260px; margin: -130px 0 0 -130px;  /* centre on the point */
   border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle, rgba(226,58,75,0.22), rgba(191,30,46,0.10) 42%, transparent 70%);
-  filter: blur(24px);
+  background: radial-gradient(circle, rgba(226,58,75,0.62), rgba(191,30,46,0.30) 38%, transparent 66%);
+  filter: blur(12px);
   mix-blend-mode: screen;
   opacity: 0; transition: opacity 0.35s var(--ease);
   transform: translate3d(-100px, -100px, 0);
@@ -903,7 +903,7 @@ html[data-theme="light"] .hero-tool--17 { color: rgba(191,30,46,0.72); }
 /* cursor glow → a soft red shadow that reads on a light page */
 html[data-theme="light"] .cursor-glow {
   mix-blend-mode: multiply;
-  background: radial-gradient(circle, rgba(191,30,46,0.16), rgba(191,30,46,0.06) 42%, transparent 70%);
+  background: radial-gradient(circle, rgba(191,30,46,0.38), rgba(191,30,46,0.16) 40%, transparent 68%);
 }
 
 /* logos journey: keep the showcase boxes dark so the white logos stay visible */
