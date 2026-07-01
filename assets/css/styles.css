@@ -150,13 +150,41 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .brand__mark--sm { width: 28px; height: 28px; font-size: 0.72rem; }
 /* header: the bare main logo, no frame or background */
 .brand__mark--logo {
+  position: relative;
   background: none; border-radius: 0; overflow: visible;
   width: 46px; height: 46px;
   /* entrance: spins WHILE growing forward (no pause), then a springy settle + red flash.
      backwards fill: hidden before it plays; no forwards fill so hover still works. */
   animation: logoIn 1.25s 0.2s backwards;
 }
-.brand__mark--logo img { object-fit: contain; }
+.brand__mark--logo img {
+  object-fit: contain;
+  /* every ~30s the logo is "re-drawn" (wiped away then sketched back in) */
+  animation: logoDraw 30s linear 2s infinite;
+}
+/* the pencil that traces the logo while it re-draws */
+.brand__pencil {
+  position: absolute; left: -2px; bottom: -3px; z-index: 2;
+  width: 16px; height: 16px; color: #f2c14e;
+  opacity: 0; pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
+  transform: scaleX(-1);   /* tip points toward the drawing edge */
+  animation: logoPencil 30s linear 2s infinite;
+}
+.brand__pencil svg { width: 100%; height: 100%; display: block; }
+
+@keyframes logoDraw {
+  0%, 82%   { -webkit-clip-path: inset(0 0 0 0);    clip-path: inset(0 0 0 0); }
+  88%       { -webkit-clip-path: inset(0 0 0 100%); clip-path: inset(0 0 0 100%); }   /* wiped away */
+  88.01%    { -webkit-clip-path: inset(0 100% 0 0); clip-path: inset(0 100% 0 0); }   /* reset (still hidden) */
+  98%,100%  { -webkit-clip-path: inset(0 0 0 0);    clip-path: inset(0 0 0 0); }      /* sketched back in */
+}
+@keyframes logoPencil {
+  0%, 87.9% { opacity: 0; transform: scaleX(-1) translateX(0); }
+  88%       { opacity: 1; transform: scaleX(-1) translateX(0); }
+  98%       { opacity: 1; transform: scaleX(-1) translateX(-44px); }   /* rides across as it draws (flipped X) */
+  99%, 100% { opacity: 0; transform: scaleX(-1) translateX(-44px); }
+}
 @keyframes logoIn {
   0% {
     opacity: 0; transform: scale(0.1) rotate(-1080deg);            /* three fast turns */
