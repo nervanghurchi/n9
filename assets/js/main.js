@@ -202,6 +202,7 @@
         : '<span style="font-family:var(--font-mono);color:var(--text-mute)">N9</span>';
       return (
         '<div class="lj-box" data-slug="' + p.slug + '">' +
+          '<div class="lj-box__glow" aria-hidden="true"></div>' +
           '<div class="lj-box__frame" role="button" tabindex="0" aria-label="Open ' + escapeHtml(p.title) + ' case study">' +
             '<span class="lj-box__num">' + num + '</span>' +
             img +
