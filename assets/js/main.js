@@ -173,6 +173,7 @@
   var ljHint = document.getElementById("ljHint");
   var ljHead = document.getElementById("ljHead");
   var ljRoad = document.getElementById("ljRoad");
+  var ljGround = document.querySelector(".lj-ground");
 
   var ljReady = false;
   var ljMQ = window.matchMedia("(max-width: 860px)");   // phones/tablets -> static stack
@@ -355,6 +356,8 @@
 
     // road lane dashes flow toward the viewer as you scroll
     if (ljRoad) ljRoad.style.setProperty("--laneoff", (p * ljPathLen * 1.2).toFixed(1));
+    // the checkered ground glides smoothly forward/back with the scroll
+    if (ljGround) ljGround.style.setProperty("--gy", (p * 1200).toFixed(1) + "px");
 
     if (ljHint) ljHint.style.opacity = (1 - clamp01(p / 0.04)).toFixed(2);
     // fade the section heading out once scrolling begins so it never sits on a box

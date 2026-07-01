@@ -360,7 +360,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
     linear-gradient(rgba(255,255,255,0.16) 1.4px, transparent 1.4px),
     linear-gradient(90deg, rgba(255,255,255,0.16) 1.4px, transparent 1.4px);
   background-size: 62px 62px;
-  background-position: 50% 100%;
+  /* JS drives --gy so the grid glides forward/back with the scroll */
+  background-position: 50% calc(100% + var(--gy, 0px));
   /* keep most of the grid visible, fade only into the far horizon + edges */
   -webkit-mask-image: radial-gradient(135% 105% at 50% 100%, #000 60%, transparent 96%);
           mask-image: radial-gradient(135% 105% at 50% 100%, #000 60%, transparent 96%);
