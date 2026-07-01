@@ -613,6 +613,20 @@
     });
   }
 
+  /* follow the device theme live — unless the visitor made a manual choice */
+  if (window.matchMedia) {
+    var themeMQ = window.matchMedia("(prefers-color-scheme: light)");
+    var onSchemeChange = function (e) {
+      var saved;
+      try { saved = localStorage.getItem("n9-theme"); } catch (err) { saved = null; }
+      if (saved) return;   // manual override wins
+      if (e.matches) document.documentElement.setAttribute("data-theme", "light");
+      else document.documentElement.removeAttribute("data-theme");
+    };
+    if (themeMQ.addEventListener) themeMQ.addEventListener("change", onSchemeChange);
+    else if (themeMQ.addListener) themeMQ.addListener(onSchemeChange);
+  }
+
   /* ---------- Init ---------- */
   renderAll();
   measureLjStage();
