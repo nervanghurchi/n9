@@ -172,6 +172,7 @@
   var ljGlow = document.getElementById("ljGlow");
   var ljHint = document.getElementById("ljHint");
   var ljHead = document.getElementById("ljHead");
+  var ljRoad = document.getElementById("ljRoad");
 
   var ljReady = false;
   var ljMQ = window.matchMedia("(max-width: 860px)");   // phones/tablets -> static stack
@@ -285,24 +286,30 @@
     var range = ljStageH - window.innerHeight;
     var p = range > 0 ? clamp01((y - ljStageTop) / range) : 0;
 
-    // each box: fade/scale in on arrival, hold, then zoom toward viewer + fade out
+    // each logo is a "billboard" on the road: it appears small & far up near the
+    // horizon, then rides toward the viewer (down + growing) and fades as it passes.
+    var vh = window.innerHeight / 100;
     for (var i = 0; i < ljCount; i++) {
       var lt = (p - i / ljCount) * ljCount;          // local 0..1 within this stop
-      var aIn = i === 0 ? 1 : clamp01((lt + 0.15) / 0.33);
-      var dep = clamp01((lt - 0.55) / 0.40);
-      var op = Math.min(aIn, 1 - dep);
-      var sc = (0.85 + 0.15 * aIn) + dep * 0.85;
+      var prog = clamp01(lt);                         // 0 = far/horizon, 1 = passed viewer
+      var aIn = i === 0 ? clamp01((lt + 0.06) / 0.20) : clamp01((lt + 0.12) / 0.30);
+      var pass = clamp01((lt - 0.58) / 0.40);
+      var op = Math.min(aIn, 1 - pass);
+      var yOff = (-15 + prog * 46) * vh;              // -15vh (far) -> +31vh (passing)
+      var sc = 0.5 + prog * 1.35;                     // small in the distance -> large up close
       var box = ljBoxEls[i];
       box.style.opacity = op.toFixed(3);
-      box.style.transform = "translate(-50%, -50%) scale(" + sc.toFixed(3) + ")";
+      box.style.transform =
+        "translate(-50%, -50%) translateY(" + yOff.toFixed(1) + "px) scale(" + sc.toFixed(3) + ")";
       if (op > 0.5) box.classList.add("is-active"); else box.classList.remove("is-active");
     }
 
-    // travelling glow along the road
+    // travelling glow + the road's lane dashes flow toward the viewer as you scroll
     var gf = ljGlowFrac(p);
     var pt = ljPath.getPointAtLength(gf * ljPathLen);
     if (ljGlow) { ljGlow.setAttribute("cx", pt.x); ljGlow.setAttribute("cy", pt.y); }
     if (ljPathLit) ljPathLit.style.strokeDashoffset = (ljPathLen * (1 - gf)).toFixed(1);
+    if (ljRoad) ljRoad.style.setProperty("--laneoff", (p * ljPathLen * 1.2).toFixed(1));
 
     // light up nodes the glow has reached
     for (var n = 0; n < ljNodeEls.length; n++) {
