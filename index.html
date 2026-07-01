@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260630-11" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260630-12" />
 
   <!-- apply saved theme before paint to avoid a flash -->
   <script>try{var t=localStorage.getItem("n9-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}</script>
@@ -151,6 +151,8 @@
     <section class="logos-journey" id="logos">
       <div class="lj-stage" id="ljStage">
         <div class="lj-pin">
+          <!-- perspective checkered ground plane -->
+          <div class="lj-ground" aria-hidden="true"></div>
           <!-- the winding road + travelling glow -->
           <svg class="lj-road" id="ljRoad" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
@@ -160,13 +162,13 @@
               </filter>
             </defs>
             <path id="ljPath" class="lj-road__base"
-              d="M 500 760 C 452 590, 556 505, 500 380 C 446 250, 552 185, 500 40"
+              d="M 500 920 C 448 730, 560 650, 500 520 C 446 395, 556 320, 500 200 C 458 95, 540 45, 500 -160"
               fill="none" />
             <path id="ljPathLit" class="lj-road__lit"
-              d="M 500 760 C 452 590, 556 505, 500 380 C 446 250, 552 185, 500 40"
+              d="M 500 920 C 448 730, 560 650, 500 520 C 446 395, 556 320, 500 200 C 458 95, 540 45, 500 -160"
               fill="none" />
             <path class="lj-road__lane"
-              d="M 500 760 C 452 590, 556 505, 500 380 C 446 250, 552 185, 500 40" />
+              d="M 500 920 C 448 730, 560 650, 500 520 C 446 395, 556 320, 500 200 C 458 95, 540 45, 500 -160" />
             <g id="ljNodes"></g>
             <circle id="ljGlow" class="lj-road__glow" r="9" filter="url(#ljGlowF)" />
           </svg>
@@ -291,7 +293,7 @@
     <div class="lightbox__counter" id="lbCounter"></div>
   </div>
 
-  <script src="assets/js/projects.js?v=20260630-11"></script>
-  <script src="assets/js/main.js?v=20260630-11"></script>
+  <script src="assets/js/projects.js?v=20260630-12"></script>
+  <script src="assets/js/main.js?v=20260630-12"></script>
 </body>
 </html>

@@ -351,14 +351,29 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   overflow: hidden; display: grid; place-items: center;
 }
 
+/* perspective checkered ground plane the road sits on */
+.lj-ground {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  transform: perspective(1000px) rotateX(62deg) scale(1.4);
+  transform-origin: 50% 90%;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 54px 54px;
+  background-position: 50% 100%;
+  /* fade the grid into the horizon and off the sides */
+  -webkit-mask-image: radial-gradient(125% 92% at 50% 100%, #000 40%, transparent 82%);
+          mask-image: radial-gradient(125% 92% at 50% 100%, #000 40%, transparent 82%);
+}
+
 /* the road — laid down in 3D perspective so it recedes toward the horizon */
 .lj-road {
-  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
   transform: perspective(1000px) rotateX(62deg) scale(1.4);
   transform-origin: 50% 90%;   /* anchored at centre-bottom -> road runs straight ahead */
-  /* dissolve the far end into the horizon */
-  -webkit-mask-image: linear-gradient(to top, #000 34%, rgba(0,0,0,0.55) 60%, transparent 84%);
-          mask-image: linear-gradient(to top, #000 34%, rgba(0,0,0,0.55) 60%, transparent 84%);
+  /* dissolve the far end into the horizon (fades high so the road looks long) */
+  -webkit-mask-image: linear-gradient(to top, #000 26%, rgba(0,0,0,0.5) 62%, transparent 92%);
+          mask-image: linear-gradient(to top, #000 26%, rgba(0,0,0,0.5) 62%, transparent 92%);
 }
 .lj-road__base { stroke: rgba(255,255,255,0.09); stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; }
 .lj-road__lit  { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; opacity: 0.9;
@@ -897,6 +912,11 @@ html[data-theme="light"] .lj-box__frame {
   background: linear-gradient(160deg, rgba(30,26,28,0.94), rgba(16,14,15,0.94));
   border-color: rgba(255,255,255,0.10);
   box-shadow: 0 30px 70px rgba(20,16,18,0.22), inset 0 1px 1px rgba(255,255,255,0.28);
+}
+html[data-theme="light"] .lj-ground {
+  background-image:
+    linear-gradient(rgba(20,16,18,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,16,18,0.08) 1px, transparent 1px);
 }
 html[data-theme="light"] .lj-road__base { stroke: rgba(20,16,18,0.14); }
 html[data-theme="light"] .lj-road__lane { stroke: rgba(20,16,18,0.30); }
