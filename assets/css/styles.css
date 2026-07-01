@@ -149,27 +149,23 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .brand__mark--logo {
   background: none; border-radius: 0; overflow: visible;
   width: 46px; height: 46px;
-  /* entrance: fast multi-spin -> springy scale-up -> strong red glow flash.
+  /* entrance: spins WHILE growing forward (no pause), then a springy settle + red flash.
      backwards fill: hidden before it plays; no forwards fill so hover still works. */
-  animation: logoIn 1.3s 0.2s backwards;
+  animation: logoIn 1.25s 0.2s backwards;
 }
 .brand__mark--logo img { object-fit: contain; }
 @keyframes logoIn {
   0% {
-    opacity: 0; transform: scale(0.12) rotate(-1080deg);      /* three fast turns */
+    opacity: 0; transform: scale(0.1) rotate(-1080deg);            /* three fast turns */
     filter: drop-shadow(0 0 0 rgba(226,58,75,0));
-    animation-timing-function: cubic-bezier(0.14, 0.86, 0.24, 1);   /* fast then decelerate */
+    animation-timing-function: cubic-bezier(0.2, 0.72, 0.3, 1);    /* keep moving, decelerate */
   }
-  45% {
-    opacity: 1; transform: scale(0.5) rotate(-70deg);
-    filter: drop-shadow(0 0 8px rgba(226,58,75,0.55));
-    animation-timing-function: cubic-bezier(0.34, 1.7, 0.5, 1);      /* spring */
+  72% {
+    opacity: 1; transform: scale(1.34) rotate(-45deg);            /* still spinning, grown big + bright flash */
+    filter: drop-shadow(0 0 36px rgba(226,58,75,1)) drop-shadow(0 0 18px rgba(255,120,130,0.95));
+    animation-timing-function: cubic-bezier(0.34, 1.5, 0.5, 1);   /* spring settle */
   }
-  68% {
-    transform: scale(1.34) rotate(0deg);                            /* overshoot + bright flash */
-    filter: drop-shadow(0 0 34px rgba(226,58,75,1)) drop-shadow(0 0 16px rgba(255,120,130,0.95));
-  }
-  84% { transform: scale(0.92) rotate(0deg); filter: drop-shadow(0 0 16px rgba(226,58,75,0.6)); }
+  88% { transform: scale(0.93) rotate(0deg); filter: drop-shadow(0 0 16px rgba(226,58,75,0.55)); }
   100% { opacity: 1; transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 0 rgba(226,58,75,0)); }
 }
 .brand__name { font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em; }
