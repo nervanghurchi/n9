@@ -157,66 +157,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
      backwards fill: hidden before it plays; no forwards fill so hover still works. */
   animation: logoIn 1.25s 0.2s backwards;
 }
-/* every ~30s: the real logo hides, a line sketch is drawn, coloured, then the
-   real logo morphs back in. All pieces share the same 30s/2s-delay timeline. */
-.brand__mark--logo img {
-  object-fit: contain;
-  animation: logoReal 30s linear 2s infinite;
-}
-/* the line-art sketch overlay */
-.brand__sketch {
-  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
-  overflow: visible; opacity: 0;
-  animation: logoSketchShow 30s linear 2s infinite;
-}
-.brand__sketch .sk-line {
-  fill: none; stroke: var(--text); stroke-width: 2.4;
-  stroke-linecap: round; stroke-linejoin: round;
-  stroke-dasharray: 165; stroke-dashoffset: 165;
-  animation: logoSketchLine 30s linear 2s infinite;
-}
-.brand__sketch .sk-fill {
-  fill: var(--accent); fill-opacity: 0; stroke: none;
-  animation: logoSketchFill 30s linear 2s infinite;
-}
-/* the pencil rides the sketch path, rotating to its many angles */
-.brand__pencil {
-  position: absolute; top: 0; left: 0; z-index: 2;
-  width: 15px; height: 15px; color: #f2c14e;
-  opacity: 0; pointer-events: none;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.45));
-  offset-path: path("M23 4 L42 40 L4 40 L23 4 M15 33 L23 16 L31 33");
-  offset-anchor: 14% 86%;      /* the pencil tip sits on the line */
-  offset-rotate: auto 40deg;   /* follow the line direction -> varied angles */
-  animation: logoPencil 30s linear 2s infinite;
-}
-.brand__pencil svg { width: 100%; height: 100%; display: block; }
-
-@keyframes logoReal {           /* real logo: hide during the sketch, morph back in */
-  0%, 64% { opacity: 1; }
-  68%, 86% { opacity: 0; }
-  90%, 100% { opacity: 1; }
-}
-@keyframes logoSketchShow {     /* the sketch overlay only shows during the draw */
-  0%, 64% { opacity: 0; }
-  67%, 88% { opacity: 1; }
-  92%, 100% { opacity: 0; }
-}
-@keyframes logoSketchLine {     /* draw the outline */
-  0%, 67% { stroke-dashoffset: 165; }
-  81%, 100% { stroke-dashoffset: 0; }
-}
-@keyframes logoSketchFill {     /* then flood it with colour */
-  0%, 81% { fill-opacity: 0; }
-  88%, 100% { fill-opacity: 0.55; }
-}
-@keyframes logoPencil {         /* pencil traces the line, then lifts off */
-  0%, 66% { opacity: 0; offset-distance: 0%; }
-  68% { opacity: 1; offset-distance: 0%; }
-  81% { opacity: 1; offset-distance: 100%; }
-  86% { opacity: 0; offset-distance: 100%; }
-  100% { opacity: 0; }
-}
+.brand__mark--logo img { object-fit: contain; }
 @keyframes logoIn {
   0% {
     opacity: 0; transform: scale(0.1) rotate(-1080deg);            /* three fast turns */
