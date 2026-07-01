@@ -179,6 +179,7 @@
   var ljBoxEls = [];
   var ljNodeEls = [];
   var ljBoxDots = [];
+  var ljCheckFrac = 0.5;   // fixed checkpoint along the road (end of the red line)
   var ljCount = 0;
   var ljNodeFrac = [];   // path fraction for each stop
   var ljHoldP = [];      // scroll-progress at which each box is centred
@@ -257,9 +258,18 @@
         if (ljNodesG) ljNodesG.appendChild(dot);
         ljBoxDots.push(dot);
       }
+      // permanent red line: from the road start (near) up to the checkpoint
       if (ljPathLit) {
-        ljPathLit.style.strokeDasharray = ljPathLen;
-        ljPathLit.style.strokeDashoffset = ljPathLen;
+        var litLen = ljCheckFrac * ljPathLen;
+        ljPathLit.style.strokeDasharray = litLen + " " + (ljPathLen - litLen);
+        ljPathLit.style.strokeDashoffset = "0";
+      }
+      // fixed checkpoint marker — the point on the road each box arrives at
+      if (ljGlow) {
+        var cp = ljPath.getPointAtLength(ljCheckFrac * ljPathLen);
+        ljGlow.setAttribute("cx", cp.x);
+        ljGlow.setAttribute("cy", cp.y);
+        ljGlow.setAttribute("r", "6");
       }
       ljReady = true;
     } catch (e) {
@@ -297,48 +307,54 @@
     var range = ljStageH - window.innerHeight;
     var p = range > 0 ? clamp01((y - ljStageTop) / range) : 0;
 
-    // each logo is a "billboard" on the road: it appears small & far up near the
-    // horizon, then rides toward the viewer (down + growing) and fades as it passes.
+    // Each logo box, with its own dot, travels the road from the far horizon down
+    // to a FIXED checkpoint (end of the permanent red line). At the checkpoint the
+    // box is fully shown and its dot lights up, then it dwells (a pause) before it
+    // slides on toward the viewer and fades, letting the next logo come up.
     var vh = window.innerHeight / 100;
+    var C = ljCheckFrac;
     for (var i = 0; i < ljCount; i++) {
       var lt = (p - i / ljCount) * ljCount;          // local 0..1 within this stop
-      var prog = clamp01(lt);                         // 0 = far/horizon, 1 = passed viewer
-      var aIn = i === 0 ? clamp01((lt + 0.06) / 0.20) : clamp01((lt + 0.12) / 0.30);
-      var pass = clamp01((lt - 0.58) / 0.40);
+
+      // three phases: approach [0,0.35] · dwell/pause [0.35,0.65] · depart [0.65,1]
+      var tp;                                        // 0 far · 0.5 at checkpoint · 1 passed
+      if (lt < 0.35) tp = (lt / 0.35) * 0.5;
+      else if (lt < 0.65) tp = 0.5;                  // <-- the pause
+      else tp = 0.5 + ((lt - 0.65) / 0.35) * 0.5;
+      tp = clamp01(tp);
+
+      var aIn = i === 0 ? clamp01((lt + 0.05) / 0.18) : clamp01((lt + 0.10) / 0.28);
+      var pass = clamp01((lt - 0.70) / 0.28);
       var op = Math.min(aIn, 1 - pass);
-      var yOff = (-15 + prog * 46) * vh;              // -15vh (far) -> +31vh (passing)
-      var sc = 0.5 + prog * 1.35;                     // small in the distance -> large up close
+
+      var yOff = (-15 + tp * 46) * vh;               // -15vh (far) -> +31vh (passed)
+      var sc = 0.5 + tp * 1.35;
       var box = ljBoxEls[i];
       box.style.opacity = op.toFixed(3);
       box.style.transform =
         "translate(-50%, -50%) translateY(" + yOff.toFixed(1) + "px) scale(" + sc.toFixed(3) + ")";
       if (op > 0.5) box.classList.add("is-active"); else box.classList.remove("is-active");
 
-      // this box's glowing dot rides the road with it: from far (horizon) to near,
-      // growing and brightening as the box comes forward and takes its turn.
+      // the box's dot on the road: far -> checkpoint (dwell, glowing) -> near
       var dot = ljBoxDots[i];
       if (dot) {
-        var dfrac = clamp01(1 - prog);                  // 1 = far end, 0 = near end
+        var dfrac;
+        if (lt < 0.35) dfrac = 1 - (lt / 0.35) * (1 - C);   // far end -> checkpoint
+        else if (lt < 0.65) dfrac = C;                       // hold at checkpoint
+        else dfrac = C - clamp01((lt - 0.65) / 0.35) * C;    // checkpoint -> near end
+        dfrac = clamp01(dfrac);
         var dp = ljPath.getPointAtLength(dfrac * ljPathLen);
+        // bright/large only while at the checkpoint, dim while travelling
+        var atPoint = clamp01((lt - 0.28) / 0.07) * (1 - clamp01((lt - 0.66) / 0.08));
         dot.setAttribute("cx", dp.x);
         dot.setAttribute("cy", dp.y);
-        dot.setAttribute("r", (5 + prog * 11).toFixed(1));   // grows as it nears
-        dot.style.opacity = op.toFixed(3);              // brightest when the box is active
+        dot.setAttribute("r", (5 + atPoint * 11).toFixed(1));
+        dot.style.opacity = (op * (0.28 + 0.72 * atPoint)).toFixed(3);
       }
     }
 
-    // travelling glow + the road's lane dashes flow toward the viewer as you scroll
-    var gf = ljGlowFrac(p);
-    var pt = ljPath.getPointAtLength(gf * ljPathLen);
-    if (ljGlow) { ljGlow.setAttribute("cx", pt.x); ljGlow.setAttribute("cy", pt.y); }
-    if (ljPathLit) ljPathLit.style.strokeDashoffset = (ljPathLen * (1 - gf)).toFixed(1);
+    // road lane dashes flow toward the viewer as you scroll
     if (ljRoad) ljRoad.style.setProperty("--laneoff", (p * ljPathLen * 1.2).toFixed(1));
-
-    // light up nodes the glow has reached
-    for (var n = 0; n < ljNodeEls.length; n++) {
-      if (gf >= ljNodeFrac[n] - 0.012) ljNodeEls[n].classList.add("is-on");
-      else ljNodeEls[n].classList.remove("is-on");
-    }
 
     if (ljHint) ljHint.style.opacity = (1 - clamp01(p / 0.04)).toFixed(2);
     // fade the section heading out once scrolling begins so it never sits on a box

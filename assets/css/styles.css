@@ -376,9 +376,10 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
           mask-image: linear-gradient(to top, #000 24%, rgba(0,0,0,0.55) 68%, transparent 97%);
 }
 .lj-road__base { stroke: rgba(255,255,255,0.09); stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; }
-.lj-road__lit  { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; opacity: 0.9;
-  /* JS drives stroke-dashoffset to "draw" the travelled portion */ }
-.lj-road__glow { display: none; }   /* replaced by the per-box glow dots */
+/* permanent red line from the road start up to the checkpoint */
+.lj-road__lit  { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; opacity: 0.92; }
+/* the fixed checkpoint marker on the road */
+.lj-road__glow { fill: rgba(255,110,122,0.6); }
 /* glowing dot that rides the road with each logo box */
 .lj-boxdot { fill: #ff5a68; }
 /* centre lane marking — dashes flow toward the viewer as you scroll (JS sets --laneoff) */
@@ -387,11 +388,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   stroke-linecap: round; fill: none;
   stroke-dashoffset: var(--laneoff, 0);
 }
-.lj-node {
-  fill: rgba(10,10,12,0.9); stroke: rgba(255,255,255,0.25); stroke-width: 2;
-  transition: stroke 0.4s var(--ease), fill 0.4s var(--ease);
-}
-.lj-node.is-on { fill: var(--accent); stroke: var(--accent-2); }
+.lj-node { display: none; }   /* static stop markers hidden — per-box dots + checkpoint used instead */
 
 /* section heading pinned near the top — fades out as the journey starts */
 .lj-head {
