@@ -178,6 +178,7 @@
   var ljMQ = window.matchMedia("(max-width: 860px)");   // phones/tablets -> static stack
   var ljBoxEls = [];
   var ljNodeEls = [];
+  var ljBoxDots = [];
   var ljCount = 0;
   var ljNodeFrac = [];   // path fraction for each stop
   var ljHoldP = [];      // scroll-progress at which each box is centred
@@ -202,7 +203,6 @@
         : '<span style="font-family:var(--font-mono);color:var(--text-mute)">N9</span>';
       return (
         '<div class="lj-box" data-slug="' + p.slug + '">' +
-          '<div class="lj-box__glow" aria-hidden="true"></div>' +
           '<div class="lj-box__frame" role="button" tabindex="0" aria-label="Open ' + escapeHtml(p.title) + ' case study">' +
             '<span class="lj-box__num">' + num + '</span>' +
             img +
@@ -231,6 +231,7 @@
     ljNodeFrac = [];
     ljHoldP = [];
     ljNodeEls = [];
+    ljBoxDots = [];
     if (ljNodesG) ljNodesG.innerHTML = "";
     try {
       ljPathLen = ljPath.getTotalLength();
@@ -246,6 +247,15 @@
         node.setAttribute("r", "7");
         if (ljNodesG) ljNodesG.appendChild(node);
         ljNodeEls.push(node);
+
+        // one glowing dot per box — rides the road in sync with its box
+        var dot = document.createElementNS(SVGNS, "circle");
+        dot.setAttribute("class", "lj-boxdot");
+        dot.setAttribute("r", "8");
+        dot.setAttribute("filter", "url(#ljGlowF)");
+        dot.style.opacity = "0";
+        if (ljNodesG) ljNodesG.appendChild(dot);
+        ljBoxDots.push(dot);
       }
       if (ljPathLit) {
         ljPathLit.style.strokeDasharray = ljPathLen;
@@ -303,6 +313,18 @@
       box.style.transform =
         "translate(-50%, -50%) translateY(" + yOff.toFixed(1) + "px) scale(" + sc.toFixed(3) + ")";
       if (op > 0.5) box.classList.add("is-active"); else box.classList.remove("is-active");
+
+      // this box's glowing dot rides the road with it: from far (horizon) to near,
+      // growing and brightening as the box comes forward and takes its turn.
+      var dot = ljBoxDots[i];
+      if (dot) {
+        var dfrac = clamp01(1 - prog);                  // 1 = far end, 0 = near end
+        var dp = ljPath.getPointAtLength(dfrac * ljPathLen);
+        dot.setAttribute("cx", dp.x);
+        dot.setAttribute("cy", dp.y);
+        dot.setAttribute("r", (5 + prog * 11).toFixed(1));   // grows as it nears
+        dot.style.opacity = op.toFixed(3);              // brightest when the box is active
+      }
     }
 
     // travelling glow + the road's lane dashes flow toward the viewer as you scroll

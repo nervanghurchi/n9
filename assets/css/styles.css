@@ -378,7 +378,9 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .lj-road__base { stroke: rgba(255,255,255,0.09); stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; }
 .lj-road__lit  { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; opacity: 0.9;
   /* JS drives stroke-dashoffset to "draw" the travelled portion */ }
-.lj-road__glow { fill: #fff; }
+.lj-road__glow { display: none; }   /* replaced by the per-box glow dots */
+/* glowing dot that rides the road with each logo box */
+.lj-boxdot { fill: #ff5a68; }
 /* centre lane marking — dashes flow toward the viewer as you scroll (JS sets --laneoff) */
 .lj-road__lane {
   stroke: rgba(255,255,255,0.24); stroke-width: 3; stroke-dasharray: 4 20;
@@ -409,17 +411,6 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   text-align: center;
 }
 .lj-box.is-active { pointer-events: auto; }
-/* glowing pool of light on the road beneath each logo box — rides with the box */
-.lj-box__glow {
-  position: absolute; left: 50%; top: 96%;
-  width: 88%; height: 70px;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center,
-    rgba(226,58,75,0.85), rgba(191,30,46,0.4) 40%, transparent 72%);
-  filter: blur(14px);
-  border-radius: 50%;
-  pointer-events: none; z-index: -1;
-}
 .lj-box__frame {
   position: relative;
   border: 1px solid var(--glass-border); border-radius: 22px;
