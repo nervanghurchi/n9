@@ -303,8 +303,20 @@
     return ljNodeFrac[last];
   }
 
+  var ljWasVisible = false;
   function updateLogoJourney(y) {
     if (!ljReady || !ljStage || ljMQ.matches) return;   // static stack on phones
+
+    // Skip all the per-frame work while the Logos section is off-screen. Run one
+    // final update as it leaves so boxes/dots settle in their end state.
+    var visible = (y + window.innerHeight > ljStageTop) && (y < ljStageTop + ljStageH);
+    if (!visible) {
+      if (!ljWasVisible) return;
+      ljWasVisible = false;
+    } else {
+      ljWasVisible = true;
+    }
+
     var range = ljStageH - window.innerHeight;
     var p = range > 0 ? clamp01((y - ljStageTop) / range) : 0;
 
