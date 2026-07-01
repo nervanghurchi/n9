@@ -351,12 +351,21 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   overflow: hidden; display: grid; place-items: center;
 }
 
-/* the road */
-.lj-road { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-.lj-road__base { stroke: rgba(255,255,255,0.10); stroke-width: 3; stroke-dasharray: 2 12; stroke-linecap: round; }
-.lj-road__lit  { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; opacity: 0.85;
+/* the road — laid down in 3D perspective so it recedes toward the horizon */
+.lj-road {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+  transform: perspective(1000px) rotateX(60deg) scale(1.34);
+  transform-origin: 50% 86%;
+  /* dissolve the far end into the horizon */
+  -webkit-mask-image: linear-gradient(to top, #000 38%, rgba(0,0,0,0.6) 62%, transparent 86%);
+          mask-image: linear-gradient(to top, #000 38%, rgba(0,0,0,0.6) 62%, transparent 86%);
+}
+.lj-road__base { stroke: rgba(255,255,255,0.08); stroke-width: 30; stroke-linecap: round; stroke-linejoin: round; }
+.lj-road__lit  { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; opacity: 0.9;
   /* JS drives stroke-dashoffset to "draw" the travelled portion */ }
 .lj-road__glow { fill: #fff; }
+/* faint centre lane marking on top of the road bed */
+.lj-road__lane { stroke: rgba(255,255,255,0.22); stroke-width: 2.4; stroke-dasharray: 3 16; stroke-linecap: round; fill: none; }
 .lj-node {
   fill: rgba(10,10,12,0.9); stroke: rgba(255,255,255,0.25); stroke-width: 2;
   transition: stroke 0.4s var(--ease), fill 0.4s var(--ease);
@@ -885,7 +894,8 @@ html[data-theme="light"] .lj-box__frame {
   border-color: rgba(255,255,255,0.10);
   box-shadow: 0 30px 70px rgba(20,16,18,0.22), inset 0 1px 1px rgba(255,255,255,0.28);
 }
-html[data-theme="light"] .lj-road__base { stroke: rgba(20,16,18,0.16); }
+html[data-theme="light"] .lj-road__base { stroke: rgba(20,16,18,0.14); }
+html[data-theme="light"] .lj-road__lane { stroke: rgba(20,16,18,0.30); }
 html[data-theme="light"] .lj-road__glow { fill: var(--accent); }
 html[data-theme="light"] .lj-node { fill: #ffffff; stroke: rgba(20,16,18,0.28); }
 
