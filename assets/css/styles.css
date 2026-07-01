@@ -354,7 +354,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 /* perspective checkered ground plane the road sits on */
 .lj-ground {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  transform: perspective(1150px) rotateX(55deg) scale(1.5);
+  transform: perspective(1150px) rotateX(63deg) scale(1.5);
   transform-origin: 50% 92%;
   background-image:
     linear-gradient(rgba(255,255,255,0.16) 1.4px, transparent 1.4px),
@@ -369,7 +369,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 /* the road — laid down in 3D perspective so it recedes toward the horizon */
 .lj-road {
   position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
-  transform: perspective(1150px) rotateX(55deg) scale(1.5);
+  transform: perspective(1150px) rotateX(63deg) scale(1.5);
   transform-origin: 50% 92%;   /* anchored at centre-bottom -> road runs straight ahead */
   /* dissolve only the far end into the horizon (fades high so the road looks long) */
   -webkit-mask-image: linear-gradient(to top, #000 24%, rgba(0,0,0,0.55) 68%, transparent 97%);
